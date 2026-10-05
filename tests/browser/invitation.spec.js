@@ -28,6 +28,16 @@ for (const width of [375, 768, 1440]) {
     await expect(page.getByRole('button', { name: 'Mute music' })).toHaveAttribute('aria-pressed', 'true');
     await page.getByRole('button', { name: 'Mute music' }).click();
     expect(errors).toEqual([]);
+    await page.evaluate(async () => {
+      const distance = 400;
+      const delay = 50;
+      while (document.scrollingElement.scrollTop + window.innerHeight < document.scrollingElement.scrollHeight) {
+        document.scrollingElement.scrollBy(0, distance);
+        await new Promise(r => setTimeout(r, delay));
+      }
+      window.scrollTo(0, 0);
+      await new Promise(r => setTimeout(r, 100));
+    });
     await page.screenshot({ path: `test-results/layout-${width}.png`, fullPage: true });
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   });

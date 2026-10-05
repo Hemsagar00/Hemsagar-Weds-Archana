@@ -15,9 +15,30 @@ function Reveal({ children, className = '' }) {
   const ref = useRef(null);
   useEffect(() => {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const el = ref.current; el.classList.add('reveal-ready');
-    const observer = new IntersectionObserver(entries => { if (entries[0].isIntersecting) { el.classList.add('revealed'); observer.disconnect(); } }, { threshold: .08 });
-    observer.observe(el); return () => observer.disconnect();
+    const el = ref.current;
+    if (!el) return;
+    el.classList.add('reveal-ready');
+    const reveal = () => {
+      el.classList.add('revealed');
+      observer?.disconnect();
+      window.removeEventListener('scroll', reveal);
+    };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) reveal();
+      });
+    }, { rootMargin: '250px 0px 250px 0px', threshold: 0.01 });
+    observer.observe(el);
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 250 && rect.bottom > -250) {
+      reveal();
+    } else {
+      window.addEventListener('scroll', reveal, { passive: true });
+    }
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', reveal);
+    };
   }, []);
   const Tag = className === 'letter-line' ? 'span' : 'div';
   return <Tag ref={ref} className={className}>{children}</Tag>;
@@ -37,12 +58,35 @@ function Music() {
         if (playing) audio.current.pause(); else await audio.current.play();
       } else {
         synth.current ||= new (window.AudioContext || window.webkitAudioContext)();
-        if (playing) { clearInterval(timer.current); await synth.current.suspend(); }
-        else {
-          await synth.current.resume(); let step = 0;
-          const notes = [261.63, 293.66, 329.63, 392, 440, 392, 329.63, 293.66];
-          const play = () => { const ctx = synth.current, osc = ctx.createOscillator(), gain = ctx.createGain(); osc.type = 'sine'; osc.frequency.value = notes[step++ % notes.length]; gain.gain.setValueAtTime(0, ctx.currentTime); gain.gain.linearRampToValueAtTime(.055, ctx.currentTime + .15); gain.gain.exponentialRampToValueAtTime(.001, ctx.currentTime + 1.7); osc.connect(gain); gain.connect(ctx.destination); osc.start(); osc.stop(ctx.currentTime + 1.8); };
-          play(); timer.current = setInterval(play, 1500);
+        if (playing) {
+          clearInterval(timer.current);
+          if (synth.current.state === 'running') await synth.current.suspend();
+        } else {
+          await synth.current.resume();
+          let step = 0;
+          // Auspicious Carnatic Raga Mohanam flute melody (Sa Ri Ga Pa Dha Sa)
+          const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 440.00, 392.00, 329.63, 293.66];
+          const play = () => {
+            const ctx = synth.current;
+            if (!ctx || ctx.state !== 'running') return;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const filter = ctx.createBiquadFilter();
+            osc.type = 'triangle';
+            osc.frequency.value = notes[step++ % notes.length];
+            filter.type = 'lowpass';
+            filter.frequency.value = 1100;
+            gain.gain.setValueAtTime(0, ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(.04, ctx.currentTime + .15);
+            gain.gain.exponentialRampToValueAtTime(.0008, ctx.currentTime + 1.7);
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 1.8);
+          };
+          play();
+          timer.current = setInterval(play, 1400);
         }
       }
       setPlaying(!playing); setError('');
@@ -56,10 +100,10 @@ function Header() {
   return <header className="header"><a href="#home" className="monogram" aria-label="Hemsagar and Archana home">H<span>&</span>A</a><nav aria-label="Main navigation" className={open ? 'nav open' : 'nav'} id="navigation">{links.map(([id, label]) => <a href={`#${id}`} onClick={() => setOpen(false)} key={id}>{label}</a>)}<a className="nav-rsvp" href="#rsvp" onClick={() => setOpen(false)}>RSVP <ArrowUpRight size={15}/></a></nav><button className="menu icon-button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="navigation" onClick={() => setOpen(!open)}><Icon type={open ? X : List}/></button><Music/></header>;
 }
 function Hero() {
-  return <section id="home" className="hero"><div className="hero-copy"><div className="eyebrow">With love. With blessings. With you.</div><Ornament/><h1>{w.groom}<span className="weds">weds</span><em>{w.bride}</em></h1><p>Two hearts, one promise,<br/>one beautiful forever.</p><a className="button" href="#invitation">You’re invited <Icon type={ArrowRight} size={18}/></a><a className="scroll-cue" href="#invitation"><span>Scroll to explore</span><Icon type={ArrowDown} size={16}/></a></div><div className="hero-visual"><Photo src={w.images.temple} alt="Colourful gopurams of Meenakshi temple beneath the open sky" eager/><div className="hero-arch"/><div className="image-caption"><span>A sacred beginning</span><p>Rooted in tradition.<br/>Written in love.</p></div><span className="vertical-caption">THE WEDDING OF HEMSAGAR & ARCHANA</span></div><span className="hero-corner" aria-hidden="true"><Icon size={65}/></span></section>;
+  return <section id="home" className="hero"><div className="hero-copy"><div className="eyebrow">With love. With blessings. With you.</div><Ornament/><h1>{w.groom}<span className="weds">weds</span><em>{w.bride}</em></h1><p>Two hearts, one promise,<br/>one beautiful forever.</p><a className="button" href="#invitation">You’re invited <Icon type={ArrowRight} size={18}/></a><a className="scroll-cue" href="#invitation"><span>Scroll to explore</span><Icon type={ArrowDown} size={16}/></a></div><div className="hero-visual"><Photo src={w.images.temple} alt="Traditional South Indian temple gopuram beneath a clear blue sky with festive garlands" eager/><div className="hero-arch"/><div className="image-caption"><span>A sacred beginning</span><p>Rooted in tradition.<br/>Written in love.</p></div><span className="vertical-caption">THE WEDDING OF HEMSAGAR & ARCHANA</span></div><span className="hero-corner" aria-hidden="true"><Icon size={65}/></span></section>;
 }
 function Invitation() {
-  return <section id="invitation" className="section invitation"><Reveal><div className="invitation-card" style={w.images.invitation ? { backgroundImage: `url(${w.images.invitation})` } : undefined}><div className="ganesha" role="img" aria-label="Lord Ganesha">॥ श्री गणेशाय नमः ॥</div><Icon size={42}/><p className="shloka" lang="sa">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ।</p><span className="small-label">A sacred union. A beautiful beginning.</span><h2>With joyful hearts,<br/>we invite you.</h2><p>With the blessings of our parents and families,<br className="desktop-break"/> we invite you to celebrate the wedding of</p><div className="invite-names">{w.groom}<span>&</span>{w.bride}</div><p>and bless the couple as they begin<br/>their beautiful journey together.</p><Ornament/><p className="invitation-date">{w.date ? new Date(w.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: w.timezone }) : 'A beautiful day, soon to be announced'}</p><a className="text-link" href="#celebrations">Discover the celebrations <ArrowDown size={16}/></a></div></Reveal><span className="side-note">SURROUNDED BY LOVE</span></section>;
+  return <section id="invitation" className="section invitation"><Reveal><div className="invitation-card" style={w.images.invitation ? { backgroundImage: `url(${w.images.invitation})` } : undefined}><div className="invitation-inner"><div className="ganesha" role="img" aria-label="Lord Ganesha">॥ श्री गणेशाय नमः ॥</div><Icon size={42}/><p className="shloka" lang="sa">वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ।<br/>निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥</p><span className="small-label">A sacred union · A beautiful beginning</span><h2>With joyful hearts,<br/>we invite you.</h2><p>With the blessings of our parents and families,<br className="desktop-break"/> we invite you to celebrate the wedding of</p><div className="invite-names">{w.groom}<span>&</span>{w.bride}</div><p>and bless the couple as they begin<br/>their beautiful journey together.</p><Ornament/><p className="invitation-date">{w.date ? new Date(w.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: w.timezone }) : 'A beautiful day, soon to be announced'}</p><a className="text-link" href="#celebrations">Discover the celebrations <ArrowDown size={16}/></a></div></div></Reveal><span className="side-note">SURROUNDED BY LOVE</span></section>;
 }
 const letter = [
   ['I may not always know the perfect words,', 'but I know one thing with complete certainty —', 'I want to walk through life with you.'],

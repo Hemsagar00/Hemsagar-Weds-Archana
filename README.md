@@ -17,33 +17,22 @@ On Windows PowerShell with restricted script execution, use `npm.cmd` / `npx.cmd
 
 ## Personalize
 
-All wedding information is in **`src/config.js`**. No date, venue, phone number, or personal history has been invented. Until you provide them, the corresponding sections show “coming soon” messaging.
+All wedding information is centrally configured in [src/config.js](file:///c:/Users/frida/OneDrive/Desktop/website/Hemsagar%20weds%20Archana/src/config.js).
 
-- `date`: wedding time with explicit timezone, for example `2027-02-14T09:00:00+05:30`. This activates the countdown. Past dates show a married-state message.
-- `events`: set each event’s `start`, `end`, and `venue`. Valid times activate Google Calendar links. Add further events here as needed.
-- `venue`: set name, full address, and optionally a Google Maps URL. A map search link is generated from the address otherwise.
-- `whatsapp`: your country code and phone number. This activates the WhatsApp RSVP link and prefilled guest message. No RSVP data is stored by the site.
-- `instagram`: your profile URL, or leave blank for the wedding hashtag page.
-- `profiles` and `story`: edit the couple introductions and milestones.
-- `audio`: add a licensed flute or veena recording to `public/media/` and use `media/wedding-music.mp3`. The default is a quiet synthesized pentatonic melody, not a recorded or authentic veena performance. Sound starts only when tapped.
-
-## Your supplied reference images
-
-Chat attachments were not present as filesystem assets. Save your originals under `public/media/` and update `images` in the configuration:
-
-| Image | Suggested path | Use |
-|---|---|---|
-| Blue-sky temple | `media/temple.webp` | `images.temple` hero |
-| Couple photograph | `media/couple.webp` | `images.couple` love letter |
-| Ornamental invitation frame | `media/invitation.webp` | `images.invitation` (optional; ensure text remains readable) |
-| Groom / bride portraits | `media/groom.webp`, `media/bride.webp` | profile tabs |
-| Garlanding illustration | `media/illustration.webp` | `images.illustration` |
-
-Use clean images without baked-in text. The provided text-heavy reference compositions are best treated as design references, not backgrounds behind additional text. The site includes an original SVG couple illustration in `public/couple.svg`, and honest photo placeholders. Gallery entries take `{ src: 'media/photo.webp', caption: 'Our engagement' }`.
-
-Use WebP/AVIF, approximately 1600px wide for the hero and 1000px for gallery photos. Keep public asset paths relative (`media/...`) for GitHub Pages subdirectory compatibility.
-
-The temporary hero is a Wikimedia Commons photograph: [An aerial view of Madurai city from atop of Meenakshi Amman temple](https://commons.wikimedia.org/wiki/File:An_aerial_view_of_Madurai_city_from_atop_of_Meenakshi_Amman_temple.jpg). Replace with your supplied temple artwork before publishing, or review and fulfill the source image’s attribution/license requirements. It is decorative, not the confirmed wedding venue.
+- `groom` & `bride`: Couple names
+- `date`: Wedding date & time with explicit timezone, e.g. `2026-11-28T09:30:00+05:30`. Controls the live ticking countdown and formal invitation date.
+- `events`: Array of ceremony blocks (Muhurtham, Reception, Haldi). Populating `start` and `end` activates the **Add to Google Calendar** button with auto-formatted IST times.
+- `venue`: Venue name, full address, and Google Maps URL. Activates the **Open in Google Maps** button.
+- `whatsapp`: Host's WhatsApp number with country code (e.g. `+919876543210`). Activates the instant WhatsApp RSVP button with pre-filled guest response.
+- `instagram` & `hashtag`: Wedding hashtag (e.g. `#HemsagarWedsArchana`) and Instagram link.
+- `audio`: Ambient South Indian temple music. Plays an authentic synthesized Carnatic Raga Mohanam melody with gentle tanpura harmonics by default; you can also place any licensed veena/flute MP3 in `public/media/` and specify `'media/wedding-music.mp3'`.
+- `images`: High-resolution South Indian temple aesthetic assets in `public/media/`:
+  - `temple`: Colorful South Indian temple gopuram with clear blue sky and marigold garlands (`media/temple.png`)
+  - `invitation`: Ornate gold mandap arch frame with peacocks, brass lamps, and lotus motifs (`media/invitation-frame.png`)
+  - `couple`: Couple portrait for love letter section (`media/couple-vow.png`)
+  - `groom` & `bride`: Individual portraits for the "Meet the Groom" and "Meet the Bride" tabs (`media/hemsagar.webp`, `media/archana.webp`)
+  - `illustration`: Garland exchange ceremony in front of temple mandap (`media/garland-ceremony.png`)
+- `gallery`: Keepsakes for the interactive "Touch here for magic" scatter gallery and full-screen lightbox.
 
 ## Structure
 
