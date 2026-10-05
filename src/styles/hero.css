@@ -1,0 +1,417 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   hero.css — the opening scene.
+
+   Consumes the tokens declared in src/styles/base.css only (no new colour, size
+   or easing literals beyond structure). The only motion in here is ambient and
+   transform/opacity-only, so it stays cheap on mobile; base.css already collapses
+   every animation under `prefers-reduced-motion`, and the block at the end makes
+   that explicit for screen readers' sake.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  display: grid;
+  align-content: stretch;
+  inline-size: 100%;
+  min-block-size: 100vh;
+  overflow: clip;
+  background: var(--ivory);
+}
+
+/* `svh` keeps the opening scene from jumping when mobile Safari's toolbar
+   collapses; `vh` above is the fallback for engines without it. */
+@supports (min-height: 100svh) {
+  .hero {
+    min-block-size: 100svh;
+  }
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  inline-size: 100%;
+}
+
+/* ── Copy column ───────────────────────────────────────────────────────────── */
+
+.hero__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-block-start: clamp(4.75rem, 11vh, 7rem);
+  padding-block-end: var(--space-l);
+  padding-inline: var(--page-gutter);
+}
+
+.hero__eyebrow {
+  color: color-mix(in srgb, var(--brass) 86%, var(--ink));
+}
+
+.hero__rule {
+  display: block;
+  inline-size: clamp(5.5rem, 20vw, 10rem);
+  block-size: 1px;
+  margin-block: var(--space-2xs) var(--space-xs);
+  background: linear-gradient(90deg, var(--gold), color-mix(in srgb, var(--gold) 8%, transparent));
+  transform-origin: left center;
+}
+
+.hero__names {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 1.2rem + 5.6vw, 5.75rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--maroon);
+}
+
+/* Each name rises out of its own line-mask, so the mask itself clips. */
+.hero__mask {
+  display: block;
+  overflow: hidden;
+  padding-block-end: 0.1em;
+  margin-block-end: -0.03em;
+}
+
+.hero__name-inner {
+  display: block;
+}
+
+.hero__amp {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin-block: 0.2em 0.24em;
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-size: 0.46em;
+  line-height: 1;
+}
+
+.hero__amp-line {
+  display: block;
+  inline-size: clamp(1.75rem, 7vw, 3.5rem);
+  block-size: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.75;
+}
+
+.hero__amp-glyph {
+  font-style: italic;
+}
+
+.hero__tagline {
+  max-inline-size: 26ch;
+  margin-block-start: var(--space-2xs);
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.hero__actions {
+  margin-block-start: var(--space-m);
+}
+
+.hero__cue {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin-block-start: var(--space-s);
+  color: color-mix(in srgb, var(--brass) 84%, var(--ink));
+  font-size: var(--step--2);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.hero__cue-track {
+  display: grid;
+  place-items: center;
+  inline-size: 1.9rem;
+  block-size: 1.9rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  animation: hero-cue-bob 3s var(--ease-soft) infinite;
+}
+
+.hero__cue:hover .hero__cue-track,
+.hero__cue:focus-visible .hero__cue-track {
+  border-color: var(--gold);
+  color: var(--maroon);
+}
+
+@keyframes hero-cue-bob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  45% {
+    transform: translate3d(0, 0.28rem, 0);
+  }
+}
+
+/* ── Photograph ────────────────────────────────────────────────────────────── */
+
+.hero__visual {
+  position: relative;
+  min-inline-size: 0;
+  isolation: isolate;
+}
+
+.hero__photo-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  max-block-size: 48svh;
+  background: color-mix(in srgb, var(--cream-deep) 55%, var(--ivory));
+}
+
+/* The frame is slightly larger than its clipping parent so the scrubbed parallax
+   can never expose an edge. */
+.hero__photo {
+  position: absolute;
+  inset: -5% 0;
+  inline-size: 100%;
+  block-size: 110%;
+  border-radius: 0;
+}
+
+.hero__photo img {
+  object-position: var(--photo-position, center);
+}
+
+/* Ivory gradient that dissolves the photograph's cropped left edge into the page,
+   and (on small screens) its top and bottom edges into the neighbouring bands. */
+.hero__blend {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--ivory) 0%,
+      color-mix(in srgb, var(--ivory) 88%, transparent) 5%,
+      color-mix(in srgb, var(--ivory) 56%, transparent) 12%,
+      color-mix(in srgb, var(--ivory) 24%, transparent) 22%,
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      var(--ivory) 0%,
+      color-mix(in srgb, var(--ivory) 46%, transparent) 12%,
+      transparent 26%
+    ),
+    linear-gradient(
+      0deg,
+      var(--ivory) 0%,
+      color-mix(in srgb, var(--ivory) 40%, transparent) 7%,
+      transparent 18%
+    ),
+    /* A soft ivory corner glow. The source artwork carries a faint gold watermark in
+       its upper-left that survives the crop; this dissolves it into the page instead
+       of leaving a stray mark floating over the photograph. */
+    radial-gradient(
+      38% 22% at 0% 0%,
+      color-mix(in srgb, var(--ivory) 94%, transparent) 0%,
+      color-mix(in srgb, var(--ivory) 62%, transparent) 42%,
+      transparent 78%
+    );
+}
+
+/* ── Ambient touches ───────────────────────────────────────────────────────── */
+
+/* A soft gold sheen that crosses the photograph every eleven seconds. */
+.hero__sheen {
+  position: absolute;
+  inset-block: -20%;
+  inset-inline-start: -55%;
+  z-index: 2;
+  inline-size: 45%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    color-mix(in srgb, var(--gold-light) 46%, transparent) 48%,
+    transparent
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+  animation: hero-sheen 11s var(--ease-glide) infinite;
+  will-change: transform;
+}
+
+@keyframes hero-sheen {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(7deg);
+  }
+  34%,
+  100% {
+    transform: translate3d(345%, 0, 0) rotate(7deg);
+  }
+}
+
+/* Brass-lamp flame, sitting with the lamps in the lower right of the photograph. */
+.hero__lamp {
+  position: absolute;
+  z-index: 3;
+  inset-block-end: 10%;
+  inset-inline-end: 11%;
+  inline-size: 5.5rem;
+  block-size: 5.5rem;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 55%,
+    color-mix(in srgb, var(--marigold) 90%, transparent) 0%,
+    color-mix(in srgb, var(--gold-light) 40%, transparent) 38%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  animation: hero-flicker 2.7s var(--ease-soft) infinite;
+  will-change: opacity, transform;
+}
+
+@keyframes hero-flicker {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  18% {
+    opacity: 0.62;
+    transform: scale(1.05);
+  }
+  32% {
+    opacity: 0.36;
+    transform: scale(0.98);
+  }
+  51% {
+    opacity: 0.68;
+    transform: scale(1.06);
+  }
+  67% {
+    opacity: 0.44;
+    transform: scale(1.01);
+  }
+  83% {
+    opacity: 0.58;
+    transform: scale(1.04);
+  }
+}
+
+/* Two jasmine petals loosed into the air over the photograph. */
+.hero__petal {
+  position: absolute;
+  z-index: 3;
+  inline-size: 0.6rem;
+  block-size: 0.42rem;
+  border-radius: 62% 38% 55% 45% / 58% 62% 38% 42%;
+  pointer-events: none;
+  background: linear-gradient(140deg, var(--jasmine), color-mix(in srgb, var(--cream) 78%, transparent));
+  box-shadow: 0 0 0.4rem color-mix(in srgb, var(--jasmine) 52%, transparent);
+  opacity: 0;
+  animation: hero-petal 19s linear infinite;
+  will-change: transform, opacity;
+}
+
+.hero__petal--one {
+  inset-block-start: 6%;
+  inset-inline-start: 60%;
+  animation-delay: -4s;
+}
+
+.hero__petal--two {
+  inset-block-start: 2%;
+  inset-inline-start: 78%;
+  inline-size: 0.48rem;
+  block-size: 0.34rem;
+  animation-duration: 24s;
+  animation-delay: -12s;
+}
+
+@keyframes hero-petal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  12% {
+    opacity: 0.85;
+  }
+  72% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-3rem, 52vh, 0) rotate(210deg);
+  }
+}
+
+/* ── Desktop spread ────────────────────────────────────────────────────────── */
+
+@media (min-width: 64rem) {
+  .hero__grid {
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+    grid-template-rows: 1fr;
+    align-items: stretch;
+    max-inline-size: 108rem;
+    margin-inline: auto;
+  }
+
+  .hero__copy {
+    padding-block: var(--space-2xl);
+  }
+
+  .hero__visual {
+    block-size: 100%;
+  }
+
+  .hero__photo-wrap {
+    aspect-ratio: auto;
+    max-block-size: none;
+    block-size: 100%;
+  }
+
+  /* On desktop the photograph only needs to melt leftwards: its top, right and
+     bottom edges are the edges of the spread. The fade is deliberately short so
+     the groom, who sits at the cropped edge of the source artwork, is veiled
+     rather than erased. */
+  .hero__blend {
+    background-image: linear-gradient(
+      90deg,
+      var(--ivory) 0%,
+      color-mix(in srgb, var(--ivory) 84%, transparent) 4%,
+      color-mix(in srgb, var(--ivory) 54%, transparent) 11%,
+      color-mix(in srgb, var(--ivory) 26%, transparent) 20%,
+      transparent 33%
+    );
+  }
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__sheen,
+  .hero__lamp,
+  .hero__petal,
+  .hero__cue-track {
+    animation: none;
+  }
+
+  .hero__sheen,
+  .hero__petal {
+    opacity: 0;
+  }
+
+  .hero__lamp {
+    opacity: 0.4;
+  }
+
+  .hero__cue-track {
+    transform: none;
+  }
+}

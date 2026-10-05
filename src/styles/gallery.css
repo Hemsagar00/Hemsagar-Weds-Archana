@@ -1,0 +1,285 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   gallery.css — the sealed keepsake panel, the scattered arrangement, and the
+   native <dialog> lightbox.
+
+   Tokens only (src/styles/base.css). Two columns of keepsakes at every width —
+   320px included — opening up to four from 48rem. The scatter is expressed as
+   --rotate / --offset-x / --offset-y on each card: GSAP animates to exactly
+   those values, and they double as the resting layout when motion is reduced.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.gallery {
+  background: var(--ivory);
+}
+
+.gallery__head {
+  display: grid;
+  gap: var(--space-s);
+  justify-items: center;
+  max-inline-size: 46rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.gallery__title {
+  color: var(--maroon);
+}
+
+.gallery__lede {
+  text-align: center;
+}
+
+/* ── The sealed keepsake panel ────────────────────────────────────────────── */
+
+.gallery__stage {
+  position: relative;
+  background-image: radial-gradient(ellipse at 50% 18%, var(--gold-wash), transparent 62%);
+}
+
+.gallery__seal-row {
+  display: grid;
+  justify-items: center;
+  margin-block-start: clamp(2.25rem, 7vw, 3.5rem);
+}
+
+.gallery__seal {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+  inline-size: min(100%, 26rem);
+  padding: clamp(1.6rem, 5.5vw, 2.5rem) clamp(1.35rem, 5vw, 2.75rem);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--gold) 20%, transparent), transparent 62%),
+    linear-gradient(180deg, var(--cream), color-mix(in srgb, var(--cream-deep) 62%, var(--ivory)));
+  box-shadow: var(--shadow-soft);
+  transition: padding var(--dur-mid) var(--ease-soft), border-color var(--dur-mid) var(--ease-soft),
+    box-shadow var(--dur-mid) var(--ease-soft);
+}
+
+.gallery__seal:hover,
+.gallery__seal:focus-visible {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-lift);
+}
+
+/* The envelope: two hairlines meeting in the middle of the upper half. */
+.gallery__seal::before {
+  content: '';
+  position: absolute;
+  inset: 0.5rem 0.5rem 52%;
+  opacity: 0.7;
+  background-image:
+    linear-gradient(to bottom right, transparent 49.4%, var(--rule) 49.4% 50.6%, transparent 50.6%),
+    linear-gradient(to bottom left, transparent 49.4%, var(--rule) 49.4% 50.6%, transparent 50.6%);
+  transition: opacity var(--dur-mid) var(--ease-soft);
+  pointer-events: none;
+}
+
+/* Inner hairline, so the panel reads as a pressed keepsake rather than a card. */
+.gallery__seal::after {
+  content: '';
+  position: absolute;
+  inset: 0.36rem;
+  border: 1px solid color-mix(in srgb, var(--gold) 26%, transparent);
+  border-radius: calc(var(--radius-l) - 0.2rem);
+  pointer-events: none;
+}
+
+.gallery__seal > * {
+  position: relative;
+  z-index: 1;
+}
+
+.gallery__seal.is-open {
+  padding-block: clamp(1.05rem, 3.5vw, 1.5rem);
+}
+
+.gallery__seal.is-open::before {
+  opacity: 0;
+}
+
+.gallery__seal-mark {
+  display: grid;
+  place-items: center;
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  margin-block-end: 0.35rem;
+  border: 1px solid color-mix(in srgb, var(--gold-light) 62%, transparent);
+  border-radius: 999px;
+  background: radial-gradient(circle at 36% 26%, var(--maroon), var(--maroon-deep) 74%);
+  color: var(--gold-light);
+  box-shadow: var(--glow-gold), var(--shadow-soft);
+}
+
+.gallery__seal-cue {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1.2;
+  color: var(--maroon);
+}
+
+.gallery__seal-hint {
+  font-size: var(--step--2);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--brass) 86%, var(--ink));
+}
+
+.gallery__seal-spark {
+  position: absolute;
+  inset-block-start: 0.95rem;
+  inset-inline-end: 1.1rem;
+  color: var(--gold);
+  opacity: 0.85;
+}
+
+/* ── The scattered arrangement ────────────────────────────────────────────── */
+
+.gallery__arrangement {
+  margin-block-start: clamp(2.25rem, 7vw, 3.5rem);
+}
+
+.gallery__arrangement.is-closing {
+  pointer-events: none;
+}
+
+.gallery__cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.85rem, 3.5vw, 2rem);
+  inline-size: min(100%, 74rem);
+  margin-block: 0;
+  margin-inline: auto;
+  /* Room for the scatter, so a tilted card is never clipped. */
+  padding: clamp(0.85rem, 3vw, 1.75rem) clamp(0.35rem, 1.5vw, 1rem);
+  list-style: none;
+}
+
+.gallery__cards li {
+  display: flex;
+}
+
+@media (min-width: 48rem) {
+  .gallery__cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.keepsake {
+  display: grid;
+  gap: 0.6rem;
+  inline-size: 100%;
+  margin: 0;
+  padding: 0.45rem 0.45rem 0.7rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-s);
+  background: var(--jasmine);
+  color: var(--ink);
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  /* GSAP writes the animated transform; this is the resting arrangement. */
+  transform: translate(var(--offset-x, 0), var(--offset-y, 0)) rotate(var(--rotate, 0deg));
+  transition: border-color var(--dur-mid) var(--ease-soft), box-shadow var(--dur-mid) var(--ease-soft);
+}
+
+.keepsake:hover,
+.keepsake:focus-visible {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-lift);
+}
+
+.keepsake__photo {
+  border-radius: calc(var(--radius-s) - 0.15rem);
+}
+
+.keepsake__caption {
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  line-height: 1.25;
+  color: var(--maroon);
+}
+
+.gallery__afterword {
+  margin-block-start: clamp(2rem, 6vw, 3rem);
+  text-align: center;
+}
+
+.gallery__afterword .pending-note {
+  max-inline-size: 46ch;
+  margin-inline: auto;
+}
+
+/* ── Native lightbox ──────────────────────────────────────────────────────── */
+
+.gallery__lightbox {
+  position: relative;
+  inline-size: min(94vw, 46rem);
+  max-inline-size: none;
+  max-block-size: 92vh;
+  max-block-size: 92svh;
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-l);
+  overflow: hidden auto;
+  background: var(--ivory);
+  color: var(--ink);
+  box-shadow: var(--shadow-lift);
+}
+
+.gallery__lightbox::backdrop {
+  background: color-mix(in srgb, var(--maroon-deep) 76%, transparent);
+  backdrop-filter: blur(5px);
+}
+
+.gallery__lightbox-figure {
+  display: grid;
+  margin: 0;
+}
+
+.gallery__lightbox-photo {
+  border-radius: 0;
+}
+
+.gallery__lightbox-caption {
+  padding: var(--space-s) clamp(1rem, 4vw, 1.75rem) 0;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1.2;
+  text-align: center;
+  color: var(--maroon);
+}
+
+.gallery__lightbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  margin-block-start: var(--space-m);
+  padding: 0.85rem clamp(1rem, 4vw, 1.75rem);
+  border-block-start: 1px solid var(--rule);
+  background: var(--cream);
+}
+
+.gallery__lightbox-count {
+  font-size: var(--step--1);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.gallery__lightbox-close {
+  position: absolute;
+  inset-block-start: 0.7rem;
+  inset-inline-end: 0.7rem;
+  z-index: 2;
+  background: color-mix(in srgb, var(--ivory) 88%, transparent);
+  backdrop-filter: blur(4px);
+}

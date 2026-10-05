@@ -1,0 +1,158 @@
+/* rsvp.css — the invitation to respond, then the closing footer. */
+
+.rsvp {
+  position: relative;
+  display: grid;
+  gap: var(--space-l);
+  justify-items: center;
+  background:
+    radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--gold) 16%, transparent), transparent 55%),
+    linear-gradient(150deg, var(--green), var(--green-soft));
+  color: var(--cream);
+  text-align: center;
+}
+
+.rsvp__photo {
+  inline-size: min(18rem, 62vw);
+  border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+  border-radius: var(--radius-arch);
+  box-shadow: var(--shadow-lift);
+}
+
+.rsvp__copy {
+  display: grid;
+  gap: var(--space-s);
+  justify-items: center;
+  max-inline-size: 44rem;
+}
+
+.rsvp .ornament {
+  color: var(--gold-light);
+}
+
+.rsvp__copy .eyebrow {
+  color: var(--gold-light);
+}
+
+.rsvp__title {
+  color: var(--cream);
+}
+
+.rsvp__title em {
+  color: var(--gold-light);
+}
+
+.rsvp__text {
+  color: color-mix(in srgb, var(--cream) 84%, transparent);
+}
+
+.rsvp__action {
+  background: color-mix(in srgb, var(--ivory) 94%, transparent);
+  color: var(--green);
+  border-color: color-mix(in srgb, var(--gold) 70%, transparent);
+}
+
+.rsvp__action:hover,
+.rsvp__action:focus-visible {
+  background: var(--ivory);
+}
+
+.rsvp__pending {
+  display: grid;
+  gap: var(--space-3xs);
+  justify-items: center;
+  padding: var(--space-s) var(--space-m);
+  border: 1px dashed color-mix(in srgb, var(--gold) 44%, transparent);
+  border-radius: var(--radius-m);
+  font-size: var(--step--1);
+  color: color-mix(in srgb, var(--cream) 80%, transparent);
+}
+
+@media (min-width: 64rem) {
+  .rsvp {
+    grid-template-columns: minmax(14rem, 18rem) 1fr;
+    align-items: center;
+    justify-items: stretch;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    text-align: start;
+  }
+
+  .rsvp__copy {
+    justify-items: start;
+  }
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────────── */
+
+.site-footer {
+  display: grid;
+  gap: var(--space-s);
+  justify-items: center;
+  padding: var(--space-xl) var(--page-gutter) var(--space-l);
+  background: var(--ivory);
+  text-align: center;
+  border-block-start: 1px solid var(--rule);
+}
+
+.site-footer__names {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  color: var(--maroon);
+  text-decoration: none;
+}
+
+.site-footer__names em {
+  color: var(--gold);
+}
+
+.site-footer__note {
+  font-size: var(--step--1);
+  color: var(--ink-faint);
+}
+
+.site-footer__hashtag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.55em 1.1em;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  color: var(--maroon);
+  text-decoration: none;
+  transition: background var(--dur-fast) var(--ease-soft), border-color var(--dur-fast) var(--ease-soft);
+}
+
+.site-footer__hashtag:hover,
+.site-footer__hashtag:focus-visible {
+  background: var(--gold-wash);
+  border-color: var(--gold);
+}
+
+.site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs) var(--space-s);
+  inline-size: 100%;
+  max-inline-size: 60rem;
+  margin-block-start: var(--space-m);
+  padding-block-start: var(--space-s);
+  border-block-start: 1px solid var(--rule);
+  font-size: var(--step--2);
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+}
+
+.site-footer__bottom svg {
+  color: var(--maroon);
+}
+
+.site-footer__bottom a {
+  text-decoration: none;
+}

@@ -1,0 +1,182 @@
+/* venue.css — the blessing passage over the garland photograph, then the address. */
+
+.blessing {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-block-size: clamp(30rem, 78vh, 46rem);
+  padding-block: 0;
+  background: var(--green);
+  isolation: isolate;
+}
+
+/* The photograph is a backdrop layer: it fills the section rather than imposing its own
+   aspect ratio, and a narrow viewport swaps in the taller crop (see Blessing in
+   src/components/Venue.jsx) so the couple is never slid out of frame. */
+.blessing__photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+
+.blessing__photo,
+.blessing__photo picture {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.blessing__photo img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-position: center 30%;
+}
+
+/* Deep-green veil keeps the ivory type legible over a busy photograph. The centre is
+   left comparatively open so the couple stays visible behind the blessing. */
+.blessing::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--green) 62%, transparent) 0%,
+      color-mix(in srgb, var(--green) 34%, transparent) 42%,
+      color-mix(in srgb, var(--maroon-deep) 62%, transparent) 100%
+    ),
+    radial-gradient(
+      ellipse 70% 52% at 50% 48%,
+      color-mix(in srgb, var(--green) 46%, transparent),
+      transparent 70%
+    );
+}
+
+.blessing__copy {
+  display: grid;
+  gap: var(--space-s);
+  justify-items: center;
+  max-inline-size: 46rem;
+  padding-inline: var(--page-gutter);
+  padding-block: var(--space-l);
+  text-align: center;
+  color: var(--cream);
+  text-shadow: 0 1px 22px color-mix(in srgb, var(--maroon-deep) 60%, transparent);
+}
+
+.blessing__copy .eyebrow {
+  color: var(--gold-light);
+}
+
+.blessing__title {
+  font-size: var(--step-5);
+  color: var(--cream);
+}
+
+.blessing__mask {
+  display: block;
+  overflow: hidden;
+}
+
+.blessing__word {
+  display: block;
+  will-change: transform;
+}
+
+.blessing__title em {
+  color: var(--gold-light);
+}
+
+.blessing__text {
+  max-inline-size: var(--measure-tight);
+  color: color-mix(in srgb, var(--cream) 84%, transparent);
+}
+
+/* ── Venue ─────────────────────────────────────────────────────────────────── */
+
+.venue {
+  background: linear-gradient(180deg, var(--ivory), var(--cream));
+}
+
+.venue__grid {
+  display: grid;
+  gap: var(--space-l);
+  align-items: center;
+  max-inline-size: 68rem;
+  margin-inline: auto;
+}
+
+.venue__detail {
+  display: grid;
+  gap: var(--space-s);
+  justify-items: start;
+}
+
+.venue__name {
+  font-size: var(--step-3);
+  color: var(--maroon);
+}
+
+.venue__address {
+  max-inline-size: var(--measure-tight);
+  color: var(--ink-soft);
+}
+
+.venue__date {
+  display: grid;
+  gap: var(--space-3xs);
+  justify-items: start;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  color: var(--ink);
+}
+
+.venue__date small {
+  font-family: var(--font-body);
+  font-size: var(--step--2);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.venue__visual {
+  position: relative;
+  justify-self: center;
+  inline-size: min(100%, 24rem);
+}
+
+.venue__photo {
+  border-radius: var(--radius-l) var(--radius-l) var(--radius-s) var(--radius-s);
+  box-shadow: var(--shadow-lift);
+}
+
+.venue__pin {
+  position: absolute;
+  inset-block-end: -1.1rem;
+  inset-inline-start: 50%;
+  translate: -50% 0;
+  display: grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  background: var(--ivory);
+  color: var(--maroon);
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 64rem) {
+  .venue__grid {
+    grid-template-columns: 1fr minmax(18rem, 26rem);
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  /* On wide screens the photograph leads, with the address beside it. */
+  .venue__visual {
+    order: -1;
+  }
+}

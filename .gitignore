@@ -5,3 +5,6 @@ playwright-report/
 .env*
 ChatGPT Image *.png
 
+
+scripts/__pycache__/
+public/__pycache__/

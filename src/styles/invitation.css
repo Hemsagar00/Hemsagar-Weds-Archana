@@ -1,0 +1,231 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   invitation.css — the formal invitation scene.
+
+   The ornate mandap photograph is the scene's background layer; the live text sits
+   on the ivory centre of that comp. `overflow: visible` is a deliberate, single
+   override of the `.scene` primitive so the desktop ScrollTrigger pin can escape
+   the section — the layout itself never overflows horizontally.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.invitation {
+  /* Mirrors the height of the fixed `.site-header` (0.6rem padding + a 2.75rem
+     control) so that, when the stage is pinned, the arch and its first line sit
+     just below the header instead of disappearing behind it. */
+  --invitation-header: 4rem;
+  position: relative;
+  inline-size: 100%;
+  padding: var(--invitation-header) 0 0;
+  overflow: visible;
+  background: var(--ivory);
+}
+
+.invitation__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  inline-size: 100%;
+  min-block-size: 100vh;
+  /* The arch is scaled to the stage's height on narrow screens, so its ivory
+     centre is only ~77% of that height: the copy needs generous room at the foot
+     to stay clear of the ornamental base. */
+  padding-block: var(--space-xl) var(--space-2xl);
+  padding-inline: var(--page-gutter);
+  overflow: hidden;
+  background: var(--ivory);
+}
+
+@supports (min-height: 100svh) {
+  .invitation__stage {
+    min-block-size: 100svh;
+  }
+}
+
+/* ── The arch ──────────────────────────────────────────────────────────────── */
+
+.invitation__arch {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.invitation__frame {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: 0;
+}
+
+/* Soft ivory wash over the comp's blank centre, so the live text always has a
+   quiet ground, plus gentle top and bottom fades that melt the panel into the
+   neighbouring scenes. */
+.invitation__veil {
+  --invitation-foot: linear-gradient(
+    0deg,
+    var(--ivory) 0%,
+    color-mix(in srgb, var(--ivory) 92%, transparent) 6%,
+    color-mix(in srgb, var(--ivory) 68%, transparent) 14%,
+    color-mix(in srgb, var(--ivory) 34%, transparent) 24%,
+    transparent 38%
+  );
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(
+      58% 60% at 50% 46%,
+      color-mix(in srgb, var(--ivory) 88%, transparent) 0%,
+      color-mix(in srgb, var(--ivory) 62%, transparent) 54%,
+      transparent 84%
+    ),
+    linear-gradient(
+      180deg,
+      var(--ivory) 0%,
+      color-mix(in srgb, var(--ivory) 45%, transparent) 6%,
+      transparent 16%
+    ),
+    var(--invitation-foot);
+}
+
+/* On narrow screens the arch is scaled to the stage's height, so its ornamental
+   base lands inside the copy's band. Dissolve it a little harder there. */
+@media (max-width: 40rem) {
+  .invitation__veil {
+    --invitation-foot: linear-gradient(
+      0deg,
+      var(--ivory) 0%,
+      color-mix(in srgb, var(--ivory) 96%, transparent) 9%,
+      color-mix(in srgb, var(--ivory) 78%, transparent) 20%,
+      color-mix(in srgb, var(--ivory) 44%, transparent) 32%,
+      transparent 48%
+    );
+  }
+}
+
+/* ── The invitation copy ───────────────────────────────────────────────────── */
+
+.invitation__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-xs);
+  inline-size: min(100%, 34rem);
+  text-align: center;
+}
+
+.invitation__blessing {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  line-height: 1.6;
+  color: var(--maroon);
+}
+
+.invitation__motif {
+  display: block;
+  color: var(--gold);
+}
+
+.invitation__eyebrow {
+  color: color-mix(in srgb, var(--brass) 86%, var(--ink));
+}
+
+.invitation__shloka {
+  max-inline-size: 32ch;
+  font-size: var(--step-1);
+  line-height: 1.9;
+  color: color-mix(in srgb, var(--maroon) 90%, var(--ink));
+  overflow-wrap: break-word;
+}
+
+.invitation__shloka-line {
+  display: block;
+}
+
+.invitation__translation {
+  max-inline-size: 38ch;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.invitation__ornament {
+  inline-size: 100%;
+  margin-block: var(--space-3xs);
+}
+
+.invitation__heading {
+  max-inline-size: 22ch;
+  font-size: var(--step-3);
+  color: var(--maroon);
+}
+
+.invitation__address,
+.invitation__closing {
+  max-inline-size: 36ch;
+  font-size: var(--step-0);
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.invitation__names {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  color: var(--maroon);
+}
+
+/* `.couple-amp` ships with CoupleHeading, so it is styled from the scene that
+   uses it rather than globally. */
+.invitation__names .couple-amp {
+  margin-inline: 0.3em;
+  font-style: italic;
+  color: var(--gold);
+}
+
+.invitation__date {
+  display: grid;
+  gap: var(--space-3xs);
+  margin-block-start: var(--space-2xs);
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  letter-spacing: 0.04em;
+  color: var(--maroon);
+}
+
+.invitation__weekday {
+  font-family: var(--font-body);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--brass) 84%, var(--ink));
+}
+
+.invitation__cta {
+  margin-block-start: var(--space-2xs);
+}
+
+/* ── Desktop ───────────────────────────────────────────────────────────────── */
+
+@media (min-width: 64rem) {
+  .invitation__stage {
+    min-block-size: calc(100vh - var(--invitation-header));
+    padding-block: var(--space-l);
+  }
+
+  @supports (min-height: 100svh) {
+    .invitation__stage {
+      min-block-size: calc(100svh - var(--invitation-header));
+    }
+  }
+
+  .invitation__heading {
+    max-inline-size: 20ch;
+  }
+}

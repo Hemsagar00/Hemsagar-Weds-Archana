@@ -1,0 +1,185 @@
+/* celebrations.css — the ceremonies hanging from a brass rail that draws itself. */
+
+.celebrations {
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 55%),
+    var(--ivory);
+}
+
+.section-head {
+  display: grid;
+  gap: var(--space-2xs);
+  max-inline-size: var(--measure);
+  margin-inline: auto;
+  margin-block-end: var(--space-xl);
+}
+
+.section-head--center {
+  justify-items: center;
+  text-align: center;
+}
+
+.section-head--start {
+  justify-items: start;
+  text-align: start;
+  margin-inline: 0;
+}
+
+.celebrations__inner {
+  max-inline-size: 68rem;
+  margin-inline: auto;
+}
+
+.celebrations__list {
+  position: relative;
+  display: grid;
+  gap: var(--space-l);
+}
+
+.celebrations__rail {
+  position: absolute;
+  inset-block: 1.5rem 3rem;
+  inset-inline-start: 1.35rem;
+  inline-size: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--brass) 24%, transparent);
+}
+
+.celebrations__rail-fill {
+  position: absolute;
+  inset: 0;
+  origin-block-start: 0;
+  background: linear-gradient(180deg, var(--gold), var(--brass));
+}
+
+.ceremony {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-m);
+}
+
+.ceremony__marker {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  background: var(--ivory);
+  color: var(--gold);
+  box-shadow: var(--shadow-soft);
+}
+
+.ceremony__body {
+  display: grid;
+  gap: var(--space-2xs);
+  padding: var(--space-m) var(--space-m) var(--space-l);
+  border: 1px solid color-mix(in srgb, var(--brass) 34%, transparent);
+  border-radius: var(--radius-m);
+  background:
+    linear-gradient(150deg, color-mix(in srgb, var(--jasmine) 92%, var(--ivory)), color-mix(in srgb, var(--cream) 88%, var(--ivory)));
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--dur-mid) var(--ease-soft), box-shadow var(--dur-mid) var(--ease-soft);
+}
+
+.ceremony__body:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+}
+
+.ceremony__index {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+.ceremony__name {
+  font-size: var(--step-3);
+  color: var(--maroon);
+}
+
+.ceremony__text {
+  color: var(--ink-soft);
+}
+
+.ceremony__facts {
+  display: grid;
+  gap: var(--space-3xs);
+  margin: var(--space-2xs) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.ceremony__facts li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.ceremony__facts svg {
+  flex: none;
+  color: var(--brass);
+}
+
+.celebrations__seal {
+  display: grid;
+  gap: var(--space-2xs);
+  justify-items: center;
+  margin-block-start: var(--space-xl);
+  text-align: center;
+}
+
+.celebrations__seal p {
+  display: grid;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  color: var(--maroon);
+}
+
+.celebrations__seal span {
+  font-family: var(--font-body);
+  font-size: var(--step--2);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+@media (min-width: 64rem) {
+  .celebrations__rail {
+    inset-inline-start: 50%;
+  }
+
+  .celebrations__list {
+    gap: var(--space-xl);
+  }
+
+  .ceremony {
+    inline-size: calc(50% + 1.4rem);
+    grid-template-columns: 2.75rem 1fr;
+  }
+
+  /* Alternate which side of the rail each ceremony sits on. */
+  .ceremony:nth-child(even) {
+    margin-inline-start: calc(50% - 1.4rem);
+    grid-template-columns: 1fr 2.75rem;
+  }
+
+  .ceremony:nth-child(even) .ceremony__marker {
+    order: 2;
+  }
+
+  .ceremony:nth-child(even) .ceremony__body {
+    text-align: end;
+    justify-items: end;
+  }
+
+  .ceremony:nth-child(even) .ceremony__facts li {
+    flex-direction: row-reverse;
+  }
+}

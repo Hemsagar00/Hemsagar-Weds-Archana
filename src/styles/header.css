@@ -1,0 +1,182 @@
+/* header.css — sticky brass-on-green site header with a mobile drawer. */
+
+.site-header {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  min-block-size: var(--header-height);
+  padding: 0.6rem var(--page-gutter);
+  background: color-mix(in srgb, var(--green) 94%, transparent);
+  color: var(--cream);
+  border-block-end: 1px solid color-mix(in srgb, var(--gold) 34%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.site-header__monogram {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.15em;
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  letter-spacing: 0.14em;
+  color: var(--gold-light);
+  text-decoration: none;
+}
+
+.site-header__monogram em {
+  font-size: 0.72em;
+  color: var(--jasmine);
+}
+
+.site-nav {
+  display: none;
+}
+
+.site-nav ul {
+  display: flex;
+  gap: clamp(0.9rem, 2.4vw, 2.2rem);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-nav a {
+  font-size: var(--step--2);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: color-mix(in srgb, var(--cream) 82%, transparent);
+  transition: color var(--dur-fast) var(--ease-soft);
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: var(--gold-light);
+}
+
+.site-nav__rsvp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  padding: 0.55em 1.15em;
+  border: 1px solid color-mix(in srgb, var(--gold) 60%, transparent);
+  border-radius: 999px;
+  color: var(--gold-light) !important;
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.site-header .icon-button {
+  border-color: color-mix(in srgb, var(--gold) 32%, transparent);
+  color: var(--cream);
+  inline-size: 2.4rem;
+  block-size: 2.4rem;
+}
+
+.site-header .icon-button:hover,
+.site-header .icon-button:focus-visible {
+  background: color-mix(in srgb, var(--gold) 18%, transparent);
+}
+
+/* Ambient music toggle: a slow gold ripple only while playing. */
+.music {
+  position: relative;
+}
+
+.music__rings {
+  position: absolute;
+  inset: -0.35rem;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.music__toggle.is-playing .music__rings {
+  animation: music-pulse 2.6s var(--ease-soft) infinite;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--gold-light) 55%, transparent);
+}
+
+@keyframes music-pulse {
+  0% { transform: scale(0.94); opacity: 0.75; }
+  70% { transform: scale(1.22); opacity: 0; }
+  100% { transform: scale(1.22); opacity: 0; }
+}
+
+.music__error {
+  position: absolute;
+  inset-block-start: calc(100% + 0.4rem);
+  inset-inline-end: 0;
+  inline-size: max-content;
+  max-inline-size: 14rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-s);
+  background: var(--maroon-deep);
+  color: var(--cream);
+  font-size: var(--step--2);
+}
+
+@media (max-width: 59.99rem) {
+  .site-nav {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    z-index: var(--z-overlay);
+    display: grid;
+    align-content: start;
+    gap: var(--space-m);
+    inline-size: min(20rem, 86vw);
+    block-size: 100dvh;
+    padding: 5.5rem var(--space-l) var(--space-l);
+    background: color-mix(in srgb, var(--green) 97%, black);
+    border-inline-start: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
+    transform: translateX(101%);
+    transition: transform var(--dur-mid) var(--ease-glide);
+  }
+
+  .site-nav.is-open {
+    transform: none;
+  }
+
+  .site-nav ul {
+    flex-direction: column;
+    gap: var(--space-s);
+  }
+
+  .site-nav a {
+    font-size: var(--step--1);
+    letter-spacing: 0.22em;
+  }
+
+  .site-nav__rsvp {
+    justify-self: start;
+  }
+}
+
+@media (min-width: 60rem) {
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2.6rem);
+  }
+
+  .site-nav__rsvp {
+    margin-inline-start: 0.6rem;
+  }
+
+  .site-header__menu {
+    display: none;
+  }
+}
+
+/* The header is fixed, so every anchor target needs breathing room underneath. */
+[id] {
+  scroll-margin-block-start: calc(var(--header-height) + 1.5rem);
+}

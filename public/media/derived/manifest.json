@@ -1,0 +1,264 @@
+{
+  "hero-portrait": [
+    {
+      "path": "derived/hero-portrait-685.webp",
+      "w": 685,
+      "h": 856,
+      "bytes": 90406
+    },
+    {
+      "path": "derived/hero-portrait-500.webp",
+      "w": 500,
+      "h": 625,
+      "bytes": 57818
+    }
+  ],
+  "hero-tall": [
+    {
+      "path": "derived/hero-tall-600.webp",
+      "w": 600,
+      "h": 800,
+      "bytes": 76626
+    },
+    {
+      "path": "derived/hero-tall-400.webp",
+      "w": 400,
+      "h": 533,
+      "bytes": 42772
+    }
+  ],
+  "hero-band": [
+    {
+      "path": "derived/hero-band-1146.webp",
+      "w": 1146,
+      "h": 856,
+      "bytes": 145330
+    },
+    {
+      "path": "derived/hero-band-900.webp",
+      "w": 900,
+      "h": 672,
+      "bytes": 104732
+    },
+    {
+      "path": "derived/hero-band-600.webp",
+      "w": 600,
+      "h": 448,
+      "bytes": 57678
+    }
+  ],
+  "couple-vow": [
+    {
+      "path": "derived/couple-vow-700.webp",
+      "w": 700,
+      "h": 933,
+      "bytes": 126408
+    },
+    {
+      "path": "derived/couple-vow-480.webp",
+      "w": 480,
+      "h": 640,
+      "bytes": 74052
+    }
+  ],
+  "couple-portrait": [
+    {
+      "path": "derived/couple-portrait-620.webp",
+      "w": 620,
+      "h": 775,
+      "bytes": 103512
+    },
+    {
+      "path": "derived/couple-portrait-420.webp",
+      "w": 420,
+      "h": 525,
+      "bytes": 56708
+    }
+  ],
+  "temple": [
+    {
+      "path": "derived/temple-600.webp",
+      "w": 600,
+      "h": 800,
+      "bytes": 181462
+    },
+    {
+      "path": "derived/temple-420.webp",
+      "w": 420,
+      "h": 560,
+      "bytes": 96166
+    },
+    {
+      "path": "derived/temple-300.webp",
+      "w": 300,
+      "h": 400,
+      "bytes": 51362
+    }
+  ],
+  "temple-wide": [
+    {
+      "path": "derived/temple-wide-620.webp",
+      "w": 620,
+      "h": 465,
+      "bytes": 102722
+    },
+    {
+      "path": "derived/temple-wide-420.webp",
+      "w": 420,
+      "h": 315,
+      "bytes": 51238
+    }
+  ],
+  "mandap": [
+    {
+      "path": "derived/mandap-1000.webp",
+      "w": 1000,
+      "h": 1250,
+      "bytes": 197994
+    },
+    {
+      "path": "derived/mandap-700.webp",
+      "w": 700,
+      "h": 875,
+      "bytes": 112156
+    }
+  ],
+  "mandap-wide": [
+    {
+      "path": "derived/mandap-wide-1100.webp",
+      "w": 1100,
+      "h": 733,
+      "bytes": 84088
+    },
+    {
+      "path": "derived/mandap-wide-800.webp",
+      "w": 800,
+      "h": 533,
+      "bytes": 52052
+    }
+  ],
+  "garland": [
+    {
+      "path": "derived/garland-1400.webp",
+      "w": 1400,
+      "h": 787,
+      "bytes": 159576
+    },
+    {
+      "path": "derived/garland-1000.webp",
+      "w": 1000,
+      "h": 562,
+      "bytes": 99422
+    },
+    {
+      "path": "derived/garland-700.webp",
+      "w": 700,
+      "h": 394,
+      "bytes": 57194
+    }
+  ],
+  "garland-tall": [
+    {
+      "path": "derived/garland-tall-700.webp",
+      "w": 700,
+      "h": 875,
+      "bytes": 113808
+    },
+    {
+      "path": "derived/garland-tall-480.webp",
+      "w": 480,
+      "h": 600,
+      "bytes": 64326
+    }
+  ],
+  "groom": [
+    {
+      "path": "derived/groom-900.webp",
+      "w": 900,
+      "h": 1200,
+      "bytes": 57230
+    },
+    {
+      "path": "derived/groom-620.webp",
+      "w": 620,
+      "h": 827,
+      "bytes": 36016
+    },
+    {
+      "path": "derived/groom-420.webp",
+      "w": 420,
+      "h": 560,
+      "bytes": 22462
+    }
+  ],
+  "bride": [
+    {
+      "path": "derived/bride-300.webp",
+      "w": 300,
+      "h": 400,
+      "bytes": 25670
+    },
+    {
+      "path": "derived/bride-220.webp",
+      "w": 220,
+      "h": 293,
+      "bytes": 16500
+    }
+  ],
+  "keepsake-beginning": [
+    {
+      "path": "derived/keepsake-beginning-720.webp",
+      "w": 720,
+      "h": 480,
+      "bytes": 66062
+    },
+    {
+      "path": "derived/keepsake-beginning-440.webp",
+      "w": 440,
+      "h": 293,
+      "bytes": 31168
+    }
+  ],
+  "keepsake-joy": [
+    {
+      "path": "derived/keepsake-joy-720.webp",
+      "w": 720,
+      "h": 480,
+      "bytes": 58150
+    },
+    {
+      "path": "derived/keepsake-joy-440.webp",
+      "w": 440,
+      "h": 293,
+      "bytes": 27410
+    }
+  ],
+  "keepsake-together": [
+    {
+      "path": "derived/keepsake-together-720.webp",
+      "w": 720,
+      "h": 480,
+      "bytes": 62118
+    },
+    {
+      "path": "derived/keepsake-together-440.webp",
+      "w": 440,
+      "h": 294,
+      "bytes": 30290
+    }
+  ],
+  "keepsake-forever": [
+    {
+      "path": "derived/keepsake-forever-720.webp",
+      "w": 720,
+      "h": 480,
+      "bytes": 58042
+    },
+    {
+      "path": "derived/keepsake-forever-440.webp",
+      "w": 440,
+      "h": 293,
+      "bytes": 27346
+    }
+  ]
+}

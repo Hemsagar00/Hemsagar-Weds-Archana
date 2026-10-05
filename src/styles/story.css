@@ -1,0 +1,329 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   story.css — the pinned five-chapter sequence and the two arch portraits.
+
+   Consumes the tokens in src/styles/base.css only. Two layout modes:
+
+   • Mobile-first flow: the chapters are a plain vertical stack. <Reveal> owns
+     their fade-in; nothing is pinned and native scrolling is untouched.
+   • >= 64rem with motion enabled (html.has-motion): the chapter list becomes a
+     single grid cell so the five chapters sit exactly on top of one another and
+     GSAP can cross-fade them. Without motion the stack stays readable.
+
+   Nothing here sets a hex literal.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.story {
+  position: relative;
+  background: var(--ivory);
+}
+
+/* ── The deep-green chapter stage ─────────────────────────────────────────── */
+
+.story__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-block-size: 100vh;
+  min-block-size: 100svh;
+  padding: clamp(3.5rem, 11vh, 7rem) var(--page-gutter);
+  overflow: clip;
+  color: var(--cream);
+  background:
+    radial-gradient(circle at 50% 4%, color-mix(in srgb, var(--gold) 24%, transparent), transparent 56%),
+    linear-gradient(180deg, var(--green-soft) 0%, var(--green) 44%, var(--maroon-deep) 100%);
+}
+
+/* Gold hairlines top and bottom keep the field from meeting the ivory bluntly. */
+.story__stage::before,
+.story__stage::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  block-size: 1px;
+  background: linear-gradient(90deg, transparent, var(--rule-strong), transparent);
+  pointer-events: none;
+}
+
+.story__stage::before {
+  inset-block-start: 0;
+}
+
+.story__stage::after {
+  inset-block-end: 0;
+}
+
+/* A barely-there woven texture, brighter toward the top. */
+.story__glow {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    115deg,
+    color-mix(in srgb, var(--gold) 6%, transparent) 0 1px,
+    transparent 1px 9px
+  );
+  mask-image: linear-gradient(180deg, color-mix(in srgb, var(--ink) 70%, transparent), transparent 78%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.story__stage-inner {
+  position: relative;
+  display: grid;
+  gap: clamp(1.75rem, 5.5vh, 3.25rem);
+  justify-items: center;
+  inline-size: min(100%, 74rem);
+  text-align: center;
+}
+
+/* ── Heading block ────────────────────────────────────────────────────────── */
+
+.story__head {
+  display: grid;
+  gap: var(--space-xs);
+  justify-items: center;
+  max-inline-size: 54rem;
+}
+
+.story__eyebrow {
+  color: var(--gold-light);
+}
+
+.story .story__title {
+  color: var(--ivory);
+}
+
+.story .story__title em {
+  color: var(--gold-light);
+}
+
+.story__ornament {
+  margin-block-start: var(--space-3xs);
+  color: var(--gold-light);
+}
+
+/* ── The five chapters ────────────────────────────────────────────────────── */
+
+.story__chapters {
+  display: grid;
+  gap: clamp(2.25rem, 8vw, 3.25rem);
+  inline-size: min(100%, 44rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.story__chapter {
+  display: grid;
+  gap: var(--space-3xs);
+  justify-items: center;
+}
+
+.story__chapter-num {
+  font-size: var(--step--2);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--gold-light) 76%, transparent);
+}
+
+.story__chapter-title {
+  font-size: var(--step-3);
+  color: var(--ivory);
+  text-wrap: balance;
+}
+
+.story__chapter-text {
+  max-inline-size: var(--measure-tight);
+  color: color-mix(in srgb, var(--cream) 86%, transparent);
+}
+
+@media (min-width: 64rem) {
+  /* The stack collapses only when JS has confirmed it will animate. */
+  .has-motion .story__chapters {
+    align-items: center;
+    min-block-size: 16rem;
+  }
+
+  .has-motion .story__chapter {
+    grid-area: 1 / 1;
+    align-self: center;
+    /* GSAP owns opacity and transform here, so the observer fallback's
+       transition must not smooth-scrub behind it. */
+    transition: none;
+  }
+
+  .story__chapter-text {
+    font-size: var(--step-1);
+  }
+}
+
+/* ── Decorative progress rail (desktop only; the chapters are the real list) ─ */
+
+.story__rail {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  /* Only meaningful while the chapters are actually scrubbing. */
+  .has-motion .story__rail {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    inline-size: min(100%, 26rem);
+    padding-block: 0.35rem;
+  }
+
+  .story__rail::before {
+    content: '';
+    position: absolute;
+    inset-inline: 1.25rem;
+    inset-block-start: 50%;
+    block-size: 1px;
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--gold) 55%, transparent), transparent);
+  }
+
+  .story__rail-item {
+    position: relative;
+    display: grid;
+    place-items: center;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    border: 1px solid color-mix(in srgb, var(--gold) 32%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--green) 86%, transparent);
+    color: color-mix(in srgb, var(--cream) 52%, transparent);
+    font-size: var(--step--2);
+    letter-spacing: 0.08em;
+    transition: color var(--dur-mid) var(--ease-soft), border-color var(--dur-mid) var(--ease-soft),
+      box-shadow var(--dur-mid) var(--ease-soft), transform var(--dur-mid) var(--ease-soft);
+  }
+
+  .story__rail-item.is-active {
+    color: var(--gold-light);
+    border-color: var(--gold);
+    box-shadow: var(--glow-gold);
+    transform: translateY(-2px);
+  }
+}
+
+/* ── Meet the groom / meet the bride ──────────────────────────────────────── */
+
+.story__profiles {
+  position: relative;
+  padding: clamp(3.5rem, 11vw, 7rem) var(--page-gutter);
+  background: var(--ivory);
+}
+
+.story__pair {
+  display: grid;
+  gap: clamp(3.25rem, 9vw, 4.5rem);
+  inline-size: min(100%, 74rem);
+  margin-inline: auto;
+}
+
+.story__pair-rule {
+  display: none;
+}
+
+.story-profile {
+  display: grid;
+  gap: clamp(1.25rem, 3.5vw, 1.9rem);
+  justify-items: center;
+  text-align: center;
+}
+
+/* Temple-arch mask. --radius-arch scales down proportionally on narrow frames,
+   which keeps the top a true semicircle at every size. */
+.story-profile__frame {
+  position: relative;
+  inline-size: min(100%, 22rem);
+  padding: 0.5rem;
+  border-radius: var(--radius-arch);
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--gold-light) 62%, transparent),
+    color-mix(in srgb, var(--brass) 24%, transparent) 58%,
+    color-mix(in srgb, var(--brass) 12%, transparent)
+  );
+  box-shadow: var(--shadow-soft);
+}
+
+.story-profile__frame::after {
+  content: '';
+  position: absolute;
+  inset: 0.24rem;
+  border: 1px solid color-mix(in srgb, var(--ivory) 52%, transparent);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.story-profile__photo {
+  border-radius: 0;
+}
+
+.story-profile--bride .story-profile__frame {
+  inline-size: min(100%, 14rem);
+}
+
+.story-profile__body {
+  display: grid;
+  gap: var(--space-2xs);
+  justify-items: center;
+  max-inline-size: 32rem;
+}
+
+.story-profile__name {
+  font-size: var(--step-3);
+  color: var(--maroon);
+}
+
+.story-profile__rule {
+  margin-block: var(--space-3xs) var(--space-2xs);
+  color: var(--brass);
+}
+
+.story-profile__text {
+  max-inline-size: var(--measure-tight);
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+@media (min-width: 48rem) {
+  .story__pair {
+    grid-template-columns: minmax(0, 1.4fr) 1px minmax(0, 1fr);
+    align-items: start;
+    column-gap: clamp(2rem, 6vw, 4.5rem);
+  }
+
+  .story__pair-rule {
+    display: block;
+    align-self: stretch;
+    inline-size: 1px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      var(--rule-strong) 20%,
+      var(--rule-strong) 80%,
+      transparent
+    );
+  }
+
+  .story-profile--bride {
+    margin-block-start: clamp(3rem, 11vw, 7rem);
+  }
+}
+
+@media (min-width: 64rem) {
+  .story-profile__frame {
+    inline-size: min(100%, 24rem);
+  }
+
+  .story-profile--bride .story-profile__frame {
+    inline-size: min(100%, 15rem);
+  }
+
+  .story-profile__text {
+    font-size: var(--step-0);
+  }
+}
