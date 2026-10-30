@@ -10,19 +10,19 @@
 :root {
   /* Colour — ivory, cream, royal maroon, temple gold, antique brass, deep green,
      jasmine and marigold. Runtime values from src/config.js override these. */
-  --ivory: #fbf7ef;
-  --cream: #f4e8d4;
-  --cream-deep: #e7d3ae;
-  --maroon: #6e1220;
-  --maroon-deep: #4a0a14;
-  --gold: #b08327;
-  --gold-light: #e4c87f;
-  --brass: #8a6730;
-  --green: #123528;
-  --green-soft: #1c4a38;
+  --ivory: #fff8f1;
+  --cream: #f8e6da;
+  --cream-deep: #ebc9b3;
+  --maroon: #8a1c3b;
+  --maroon-deep: #4b0f26;
+  --gold: #c28a3a;
+  --gold-light: #f0cf8e;
+  --brass: #9a6b3f;
+  --green: #0e2a3b;
+  --green-soft: #17435a;
   --jasmine: #ffffff;
-  --marigold: #dd8a17;
-  --ink: #2b1a12;
+  --marigold: #f28c28;
+  --ink: #2a1720;
 
   /* Derived surfaces. The `-raw` values are re-derived at runtime by
      src/lib/theme.js from the configured palette, so a config edit changes them too;

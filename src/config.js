@@ -3,7 +3,7 @@
 //  Components read this file; they never hardcode personal details.
 //
 //  Editing tips
-//  • Dates must include an explicit offset, e.g. 2027-02-14T09:30:00+05:30.
+//  • Dates must include an explicit offset, e.g. 2027-02-24T09:30:00+05:30.
 //    Anything unparseable falls back to a graceful "to be announced" state.
 //  • `images` entries are sets of responsive sources produced by
 //    `python scripts/derive_media.py`. Set one to null and the ornament
@@ -13,19 +13,19 @@
 
 /** Design tokens injected as CSS custom properties on <html> by src/lib/theme.js. */
 export const palette = {
-  ivory: '#FBF7EF',
-  cream: '#F4E8D4',
-  'cream-deep': '#E7D3AE',
-  maroon: '#6E1220',
-  'maroon-deep': '#4A0A14',
-  gold: '#B08327',
-  'gold-light': '#E4C87F',
-  brass: '#8A6730',
-  green: '#123528',
-  'green-soft': '#1C4A38',
+  ivory: '#FFF8F1',
+  cream: '#F8E6DA',
+  'cream-deep': '#EBC9B3',
+  maroon: '#8A1C3B',
+  'maroon-deep': '#4B0F26',
+  gold: '#C28A3A',
+  'gold-light': '#F0CF8E',
+  brass: '#9A6B3F',
+  green: '#0E2A3B',
+  'green-soft': '#17435A',
   jasmine: '#FFFFFF',
-  marigold: '#DD8A17',
-  ink: '#2B1A12',
+  marigold: '#F28C28',
+  ink: '#2A1720',
 };
 
 /**
@@ -174,9 +174,9 @@ export const wedding = {
 
   // Single source of truth for the date: the countdown, the printed invitation date
   // and every calendar link are derived from it. The offset is explicit so the moment
-  // is unambiguous — 14 February 2027, 9:30 am IST.
-  date: '2027-02-14T09:30:00+05:30',
-  endDate: '2027-02-14T21:30:00+05:30',
+  // is unambiguous — 24 February 2027, 9:30 am IST.
+  date: '2027-02-24T09:30:00+05:30',
+  endDate: '2027-02-24T21:30:00+05:30',
   timezone: 'Asia/Kolkata',
   city: 'Chennai, Tamil Nadu',
 
@@ -282,8 +282,8 @@ export const wedding = {
       name: 'Muhurtham & Sacred Vows',
       subtitle: 'The auspicious hour',
       icon: 'lotus',
-      start: '2027-02-14T09:30:00+05:30',
-      end: '2027-02-14T11:30:00+05:30',
+      start: '2027-02-24T09:30:00+05:30',
+      end: '2027-02-24T11:30:00+05:30',
       venue: 'Sri Venkateswara Kalyana Mandapam, Chennai',
       description:
         'Mangalya Dharanam, Kanyadaanam and Saptapadi — sacred vows exchanged to the fragrance of jasmine and the melody of the Nadaswaram.',
@@ -292,8 +292,8 @@ export const wedding = {
       name: 'Grand Wedding Reception',
       subtitle: 'An evening of togetherness',
       icon: 'sparkle',
-      start: '2027-02-14T18:30:00+05:30',
-      end: '2027-02-14T21:30:00+05:30',
+      start: '2027-02-24T18:30:00+05:30',
+      end: '2027-02-24T21:30:00+05:30',
       venue: 'Sri Venkateswara Kalyana Mandapam, Chennai',
       description:
         'An enchanting evening of celebration — a South Indian feast, live music, and warm greetings shared with family and friends.',
@@ -302,8 +302,8 @@ export const wedding = {
       name: 'Haldi & Nalangu',
       subtitle: 'Colours of joy',
       icon: 'marigold',
-      start: '2027-02-13T16:00:00+05:30',
-      end: '2027-02-13T18:30:00+05:30',
+      start: '2027-02-23T16:00:00+05:30',
+      end: '2027-02-23T18:30:00+05:30',
       venue: 'Sri Venkateswara Kalyana Mandapam, Chennai',
       description:
         'Turmeric blessings, traditional games and joyous songs as the pre-wedding festivities begin.',
@@ -376,7 +376,7 @@ export const wedding = {
   meta: {
     title: 'Hemsagar weds Archana — Wedding Invitation',
     description:
-      'With the blessings of our families, Hemsagar and Archana invite you to their South Indian wedding on 14 February 2027 in Chennai.',
+      'With the blessings of our families, Hemsagar and Archana invite you to their South Indian wedding on 24 February 2027 in Chennai.',
   },
 
   music: {

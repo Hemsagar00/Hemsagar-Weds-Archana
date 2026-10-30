@@ -1,0 +1,24 @@
+/* progress.css — gold thread that fills as the invitation is scrolled. */
+
+.scroll-progress {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: calc(var(--z-sticky) + 1);
+  block-size: 3px;
+  pointer-events: none;
+}
+
+.scroll-progress__bar {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--marigold), var(--gold-light), var(--maroon));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress {
+    display: none;
+  }
+}

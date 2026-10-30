@@ -14,6 +14,7 @@
 //  Rsvp        the invitation to respond
 
 import Header from './components/Header';
+import ScrollProgress from './components/ScrollProgress';
 import Hero from './components/Hero';
 import Invitation from './components/Invitation';
 import Vow from './components/Vow';
@@ -29,6 +30,7 @@ export default function App() {
   return (
     <>
       <a className="skip-link" href="#invitation">Skip to the invitation</a>
+      <ScrollProgress />
       <Header />
 
       <main id="top">
