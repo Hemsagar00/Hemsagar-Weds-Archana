@@ -9,6 +9,21 @@ import { longDate, weekday } from '../lib/time';
 const date = longDate(wedding.date, wedding.timezone);
 const day = weekday(wedding.date, wedding.timezone);
 
+/** A name with the parents beneath it, as a printed invitation sets it. */
+function Person({ name, profile }) {
+  return (
+    <span className="family__person">
+      <span>{name}</span>
+      {profile?.parents && (
+        <small>
+          {profile.relation} {profile.parents}
+          {profile.home && <>, {profile.home}</>}
+        </small>
+      )}
+    </span>
+  );
+}
+
 export default function FamilyInvite() {
   return (
     <section className="family" id="invitation" aria-labelledby="family-title">
@@ -23,9 +38,9 @@ export default function FamilyInvite() {
           <p className="family__text">{wedding.temple.familyBlessing}</p>
 
           <h2 className="family__names" id="family-title">
-            <span>{wedding.groom}</span>
+            <Person name={wedding.groom} profile={wedding.profiles?.groom} />
             <em>{wedding.temple.weds}</em>
-            <span>{wedding.bride}</span>
+            <Person name={wedding.bride} profile={wedding.profiles?.bride} />
           </h2>
 
           {date && (

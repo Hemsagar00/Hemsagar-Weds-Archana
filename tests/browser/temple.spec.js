@@ -35,6 +35,10 @@ test('the family invitation and every event are listed', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#family-title')).toContainText(wedding.groom);
   await expect(page.locator('.family__date strong')).toHaveText(date);
+  for (const profile of [wedding.profiles.groom, wedding.profiles.bride]) {
+    await expect(page.locator('#family-title')).toContainText(profile.parents);
+    await expect(page.locator('.couple-card__name').filter({ hasText: profile.name })).toBeVisible();
+  }
 
   const cards = page.locator('.event-card');
   await expect(cards).toHaveCount(wedding.events.length);

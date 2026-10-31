@@ -2,6 +2,7 @@
 //
 //  TempleOpening  sky, names, gopuram; the temple doors open on scroll or tap
 //  FamilyInvite   the family invitation inside the mandap
+//  Couple         the bride and groom, with their families
 //  EventCards     every event with date, time and location
 //  Muhurtham      the couple, the auspicious hour and a countdown
 //  VenueMap       the venue on a map
@@ -14,6 +15,7 @@ import Petals from './components/Petals';
 import MusicButton from './components/MusicButton';
 import TempleOpening from './components/TempleOpening';
 import FamilyInvite from './components/FamilyInvite';
+import Couple from './components/Couple';
 import EventCards from './components/EventCards';
 import Muhurtham from './components/Muhurtham';
 import VenueMap from './components/VenueMap';
@@ -39,6 +41,7 @@ export default function App() {
         <main>
           <TempleOpening />
           <FamilyInvite />
+          <Couple />
           <EventCards />
           <Muhurtham />
           <VenueMap />

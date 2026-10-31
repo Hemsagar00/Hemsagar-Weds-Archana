@@ -281,9 +281,27 @@ export const wedding = {
     { title: 'Our Forever', text: 'Stepping forward hand in hand towards a lifetime of devotion and sacred joy.' },
   ],
 
+  // The bride and groom, from the families' bio-data. Only what belongs on a public
+  // invitation is kept here — no phone numbers, home addresses or birth details.
   profiles: {
-    groom: { name: 'Hemsagar', role: 'The Groom', text: 'A promise to listen, to stand beside you, and to keep choosing you. Stepping into this sacred union with a heart full of gratitude and love for Archana.', image: 'groom' },
-    bride: { name: 'Archana', role: 'The Bride', text: 'A beautiful beginning, surrounded by the blessings of family and the divine. Ready to walk hand in hand towards a lifetime of shared laughter and dreams.', image: 'bride' },
+    groom: {
+      name: 'Hem Sagar Gowd',
+      role: 'The Groom',
+      relation: 'Son of',
+      parents: 'Sri Prakash Babu & Smt. Vijaya Lakshmi',
+      home: 'Anantapur',
+      details: ['B.Design, B.A.', 'Junior Assistant, Revenue Department'],
+      image: 'groom',
+    },
+    bride: {
+      name: 'Archana',
+      role: 'The Bride',
+      relation: 'Daughter of',
+      parents: 'Sri Nagaraj & Smt. Nagalakshmi',
+      home: 'Bellary',
+      details: ['M.Com'],
+      image: 'bride',
+    },
   },
 
   // Ceremonies, in the order they happen. `image` must be a key in `images` above;
@@ -333,6 +351,8 @@ export const wedding = {
     tapCue: 'Tap once — the temple doors open',
     scrollCue: 'or scroll to enter',
     familyEyebrow: 'A complete family invitation',
+    coupleEyebrow: 'The bride & groom',
+    coupleTitle: 'Two families, one celebration',
     familyBlessing:
       'With the blessings of the Almighty and our beloved elders, our families joyfully invite you and your family to the wedding of',
     familyClosing: 'Your presence and blessings will make our celebration complete.',
