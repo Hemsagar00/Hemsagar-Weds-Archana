@@ -63,7 +63,7 @@ export default function App() {
             eventStatus: 'https://schema.org/EventScheduled',
             location: {
               '@type': 'Place',
-              name: wedding.event.venueName,
+              name: wedding.event.confirmed === false ? wedding.city : wedding.event.venueName,
               address: wedding.event.address,
             },
             description: wedding.meta.description,

@@ -7,7 +7,11 @@ import { wedding } from '../config';
 import { venueMapUrl } from '../lib/time';
 
 const mapsUrl = venueMapUrl(wedding.event);
-const query = [wedding.event.venueName, wedding.event.address].filter(Boolean).join(', ');
+const confirmed = wedding.event.confirmed !== false;
+// Until the hall is fixed, centre the map on the town rather than searching for a name that isn't a place.
+const query = (confirmed ? [wedding.event.venueName, wedding.event.address] : [wedding.event.address])
+  .filter(Boolean)
+  .join(', ');
 const embedUrl = query ? `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed` : null;
 
 export default function VenueMap() {
@@ -31,6 +35,7 @@ export default function VenueMap() {
         <div className="venue-map__body">
           <h3>{wedding.event.venueName}</h3>
           <p>{wedding.event.address}</p>
+          {!confirmed && wedding.venue.tbc && <p className="venue-map__tbc">{wedding.venue.tbc}</p>}
           {mapsUrl && (
             <a className="maroon-pill" href={mapsUrl} target="_blank" rel="noreferrer">
               <Icon type={MapPin} size={15} weight="fill" />

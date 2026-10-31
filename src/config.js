@@ -188,7 +188,7 @@ export const wedding = {
   date: '2027-02-24T09:30:00+05:30',
   endDate: '2027-02-24T21:30:00+05:30',
   timezone: 'Asia/Kolkata',
-  city: 'Chennai, Tamil Nadu',
+  city: 'Ballari, Karnataka',
 
   // The family's WhatsApp number, digits with country code. Drives the RSVP link.
   whatsapp: '+919494900261',
@@ -200,10 +200,14 @@ export const wedding = {
   audio: '',
 
   // The event itself: everything a calendar invitation or map link needs.
+  // The town is settled (Ballari) but the hall is not. While `confirmed` is false the
+  // venue reads "to be confirmed" and the map centres on the town; once the hall is
+  // fixed, fill in venueName, address and mapsUrl and set it to true.
   event: {
-    venueName: 'Sri Venkateswara Kalyana Mandapam',
-    address: 'Grand Mandapam Enclave, Temple Road, Chennai, Tamil Nadu 600004',
-    mapsUrl: 'https://maps.google.com/?q=Sri+Venkateswara+Kalyana+Mandapam+Chennai',
+    confirmed: false,
+    venueName: 'Venue to be confirmed',
+    address: 'Ballari (Bellary), Karnataka',
+    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Ballari%2C+Karnataka',
   },
 
   // Navigation. `href` values must match section ids rendered by src/App.jsx.
@@ -290,7 +294,8 @@ export const wedding = {
       relation: 'Son of',
       parents: 'Sri Prakash Babu & Smt. Vijaya Lakshmi',
       home: 'Anantapur',
-      details: ['B.Design, B.A.', 'Junior Assistant, Revenue Department'],
+      education: 'B.Design, B.A.',
+      profession: 'Revenue Department',
       image: 'groom',
     },
     bride: {
@@ -299,7 +304,7 @@ export const wedding = {
       relation: 'Daughter of',
       parents: 'Sri Nagaraj & Smt. Nagalakshmi',
       home: 'Bellary',
-      details: ['M.Com'],
+      education: 'M.Com',
       image: 'bride',
     },
   },
@@ -314,7 +319,7 @@ export const wedding = {
       image: 'keepsakeTogether',
       start: '2027-02-23T16:00:00+05:30',
       end: '2027-02-23T18:30:00+05:30',
-      venue: 'Sri Venkateswara Kalyana Mandapam, Chennai',
+      venue: 'Ballari, Karnataka · venue to be confirmed',
       description:
         'Turmeric blessings, traditional games and joyous songs as the pre-wedding festivities begin.',
     },
@@ -325,7 +330,7 @@ export const wedding = {
       image: 'garland',
       start: '2027-02-24T09:30:00+05:30',
       end: '2027-02-24T11:30:00+05:30',
-      venue: 'Sri Venkateswara Kalyana Mandapam, Chennai',
+      venue: 'Ballari, Karnataka · venue to be confirmed',
       description:
         'Mangalya Dharanam, Kanyadaanam and Saptapadi — sacred vows exchanged to the fragrance of jasmine and the melody of the Nadaswaram.',
     },
@@ -338,7 +343,7 @@ export const wedding = {
       position: 'center 14%',
       start: '2027-02-24T18:30:00+05:30',
       end: '2027-02-24T21:30:00+05:30',
-      venue: 'Sri Venkateswara Kalyana Mandapam, Chennai',
+      venue: 'Ballari, Karnataka · venue to be confirmed',
       description:
         'An enchanting evening of celebration — a South Indian feast, live music, and warm greetings shared with family and friends.',
     },
@@ -394,6 +399,8 @@ export const wedding = {
     title: 'A place to',
     emphasis: 'come together.',
     pending: 'We are preparing a beautiful space to celebrate with you. The venue and full address will be shared here soon.',
+    // Shown under the map while the hall in Ballari is not yet fixed.
+    tbc: 'The celebrations will be held in Ballari. The venue is still being confirmed — the exact address will be shared here.',
     cta: 'Open in Google Maps',
   },
 
@@ -436,7 +443,7 @@ export const wedding = {
   meta: {
     title: 'Hemsagar weds Archana — Wedding Invitation',
     description:
-      'With the blessings of our families, Hemsagar and Archana invite you to their South Indian wedding on 24 February 2027 in Chennai.',
+      'With the blessings of our families, Hemsagar and Archana invite you to their South Indian wedding on 24 February 2027 in Ballari.',
   },
 
   music: {

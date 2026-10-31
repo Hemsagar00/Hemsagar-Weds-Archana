@@ -1,13 +1,21 @@
-// The bride and groom side by side: portrait, family and a line or two about each,
-// from `wedding.profiles`.
+// The bride and groom side by side: an arched portrait, family and a line or two about
+// each, from `wedding.profiles`.
 
 import { Photo } from './primitives';
 import { wedding } from '../config';
 
 function Profile({ profile }) {
+  const facts = [
+    ['From', profile.home],
+    ['Education', profile.education],
+    ['Profession', profile.profession],
+  ].filter(([, value]) => value);
+
   return (
     <article className="couple-card" data-anim>
-      <Photo name={profile.image} className="couple-card__photo" sizes="(min-width: 32rem) 14rem, 46vw" />
+      <div className="couple-card__arch">
+        <Photo name={profile.image} className="couple-card__photo" sizes="(min-width: 32rem) 14rem, 46vw" />
+      </div>
       <p className="couple-card__role">{profile.role}</p>
       <h3 className="couple-card__name">{profile.name}</h3>
       {profile.parents && (
@@ -17,10 +25,14 @@ function Profile({ profile }) {
           {profile.parents}
         </p>
       )}
-      <ul className="couple-card__details">
-        {profile.home && <li>{profile.home}</li>}
-        {profile.details?.map(line => <li key={line}>{line}</li>)}
-      </ul>
+      <dl className="couple-card__facts">
+        {facts.map(([label, value]) => (
+          <div key={label}>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
     </article>
   );
 }

@@ -578,9 +578,17 @@ body::before {
   box-shadow: 0 1.2rem 2.2rem -1.5rem color-mix(in srgb, var(--maroon-deep) 45%, transparent);
 }
 
-.couple-card__photo {
+/* A temple-niche arch: gold keyline around a full semicircular crown. */
+.couple-card__arch {
   margin-block-end: 0.5rem;
-  border-radius: 10rem 10rem 0.6rem 0.6rem;
+  padding: 0.28rem;
+  border: 1px solid color-mix(in srgb, var(--gold) 70%, transparent);
+  border-radius: 999px 999px 0.5rem 0.5rem;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+}
+
+.couple-card__photo {
+  border-radius: 999px 999px 0.3rem 0.3rem;
 }
 
 .couple-card__role {
@@ -607,15 +615,31 @@ body::before {
   color: var(--ink-soft);
 }
 
-.couple-card__details {
+.couple-card__facts {
   display: grid;
-  gap: 0.1rem;
-  margin: 0.3rem 0 0;
-  padding: 0;
-  list-style: none;
-  font-size: 0.72rem;
-  line-height: 1.45;
+  gap: 0.35rem;
+  margin: 0.5rem 0 0;
+  font-size: 0.74rem;
+  line-height: 1.35;
   color: var(--ink);
+}
+
+.couple-card__facts dt {
+  font-size: 0.54rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.couple-card__facts dd {
+  margin: 0;
+}
+
+.venue-map__tbc {
+  font-style: italic;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
 }
 
 /* ── Event cards ───────────────────────────────────────────────────────────── */
