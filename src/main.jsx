@@ -7,6 +7,8 @@ import '@fontsource/cormorant-garamond/latin-400-italic.css';
 import '@fontsource/cormorant-garamond/latin-500.css';
 import '@fontsource/montserrat/latin-400.css';
 import '@fontsource/montserrat/latin-500.css';
+import '@fontsource/cinzel/latin-500.css';
+import '@fontsource/cinzel/latin-600.css';
 
 import './styles/base.css';
 import App from './App';

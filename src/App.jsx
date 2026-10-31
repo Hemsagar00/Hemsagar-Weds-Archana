@@ -1,52 +1,51 @@
-// The invitation is a sequence of scenes, not a set of cards. Order matters: each
-// scene hands the eye to the next, and the photographs alternate between the couple
-// and the temple so the story keeps moving.
+// The invitation is one phone-shaped scroll, in the order of the day itself:
 //
-//  Hero        the couple, golden hour, names
-//  Invitation  the formal invitation inside the mandap arch
-//  Vow         the letter to the bride
-//  Story       chapters, then the two portraits
-//  Celebrations the ceremonies on a brass rail
-//  Blessing    full-bleed garland passage
-//  Countdown   the tally
-//  Venue       the gopuram and the address
-//  Gallery     keepsakes
-//  Rsvp        the invitation to respond
+//  TempleOpening  sky, names, gopuram; the temple doors open on scroll or tap
+//  FamilyInvite   the family invitation inside the mandap
+//  EventCards     every event with date, time and location
+//  Muhurtham      the couple, the auspicious hour and a countdown
+//  VenueMap       the venue on a map
+//  Memories       keepsake photographs
+//  InviteClose    RSVP on WhatsApp and the footer
 
-import Header from './components/Header';
+import { useEffect } from 'react';
 import ScrollProgress from './components/ScrollProgress';
-import Hero from './components/Hero';
-import Invitation from './components/Invitation';
-import Vow from './components/Vow';
-import Story from './components/Story';
-import Celebrations from './components/Celebrations';
-import Venue, { Blessing } from './components/Venue';
-import Countdown from './components/Countdown';
-import Gallery from './components/Gallery';
-import { Rsvp, Footer } from './components/Rsvp';
+import Petals from './components/Petals';
+import MusicButton from './components/MusicButton';
+import TempleOpening from './components/TempleOpening';
+import FamilyInvite from './components/FamilyInvite';
+import EventCards from './components/EventCards';
+import Muhurtham from './components/Muhurtham';
+import VenueMap from './components/VenueMap';
+import Memories from './components/Memories';
+import InviteClose from './components/InviteClose';
+import { revealAnimations } from './lib/gsap';
 import { wedding } from './config';
+import './styles/temple.css';
 
 export default function App() {
+  useEffect(() => {
+    revealAnimations();
+  }, []);
+
   return (
     <>
       <a className="skip-link" href="#invitation">Skip to the invitation</a>
       <ScrollProgress />
-      <Header />
+      <MusicButton />
+      <Petals />
 
-      <main id="top">
-        <Hero />
-        <Invitation />
-        <Vow />
-        <Story />
-        <Celebrations />
-        <Blessing />
-        <Countdown />
-        <Venue />
-        <Gallery />
-        <Rsvp />
-      </main>
-
-      <Footer />
+      <div className="invite">
+        <main>
+          <TempleOpening />
+          <FamilyInvite />
+          <EventCards />
+          <Muhurtham />
+          <VenueMap />
+          <Memories />
+          <InviteClose />
+        </main>
+      </div>
 
       {/* Search engines and link previews read this even when JS is unavailable. */}
       <script

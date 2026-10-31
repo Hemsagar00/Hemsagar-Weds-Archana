@@ -51,11 +51,21 @@ export const images = {
   band: {
     alt: 'The couple together beneath the temple gopuram, framed by brass lamps and jasmine',
     ratio: [4, 3],
-    sources: ['media/derived/hero-band-700.webp', 'media/derived/hero-band-1146.webp'],
+    sources: ['media/derived/hero-band-600.webp', 'media/derived/hero-band-900.webp', 'media/derived/hero-band-1146.webp'],
     src: 'media/derived/hero-band-1146.webp',
     width: 1146,
     height: 856,
     position: 'center 30%',
+  },
+  // The couple seated beneath the gopuram, with no artwork text — the muhurtham photograph.
+  seated: {
+    alt: 'Hemsagar and Archana seated together before the temple gopuram, with brass lamps beside them',
+    ratio: [3, 4],
+    sources: ['media/derived/hero-tall-400.webp', 'media/derived/hero-tall-600.webp'],
+    src: 'media/derived/hero-tall-600.webp',
+    width: 600,
+    height: 800,
+    position: 'center 40%',
   },
   // Ornate temple mandap arch — the framing device for the formal invitation.
   mandap: {
@@ -276,12 +286,25 @@ export const wedding = {
     bride: { name: 'Archana', role: 'The Bride', text: 'A beautiful beginning, surrounded by the blessings of family and the divine. Ready to walk hand in hand towards a lifetime of shared laughter and dreams.', image: 'bride' },
   },
 
-  // Ceremonies. Unknown `icon` values fall back to a lotus motif.
+  // Ceremonies, in the order they happen. `image` must be a key in `images` above;
+  // unknown `icon` values fall back to a lotus motif.
   events: [
+    {
+      name: 'Haldi & Nalangu',
+      subtitle: 'Colours of joy',
+      icon: 'marigold',
+      image: 'keepsakeTogether',
+      start: '2027-02-23T16:00:00+05:30',
+      end: '2027-02-23T18:30:00+05:30',
+      venue: 'Sri Venkateswara Kalyana Mandapam, Chennai',
+      description:
+        'Turmeric blessings, traditional games and joyous songs as the pre-wedding festivities begin.',
+    },
     {
       name: 'Muhurtham & Sacred Vows',
       subtitle: 'The auspicious hour',
       icon: 'lotus',
+      image: 'garland',
       start: '2027-02-24T09:30:00+05:30',
       end: '2027-02-24T11:30:00+05:30',
       venue: 'Sri Venkateswara Kalyana Mandapam, Chennai',
@@ -292,23 +315,40 @@ export const wedding = {
       name: 'Grand Wedding Reception',
       subtitle: 'An evening of togetherness',
       icon: 'sparkle',
+      image: 'couple',
+      // Portrait photograph in a wide card: keep the faces in frame.
+      position: 'center 14%',
       start: '2027-02-24T18:30:00+05:30',
       end: '2027-02-24T21:30:00+05:30',
       venue: 'Sri Venkateswara Kalyana Mandapam, Chennai',
       description:
         'An enchanting evening of celebration — a South Indian feast, live music, and warm greetings shared with family and friends.',
     },
-    {
-      name: 'Haldi & Nalangu',
-      subtitle: 'Colours of joy',
-      icon: 'marigold',
-      start: '2027-02-23T16:00:00+05:30',
-      end: '2027-02-23T18:30:00+05:30',
-      venue: 'Sri Venkateswara Kalyana Mandapam, Chennai',
-      description:
-        'Turmeric blessings, traditional games and joyous songs as the pre-wedding festivities begin.',
-    },
   ],
+
+  // The temple-door opening: sky, gopuram, doors that part to reveal the invitation.
+  temple: {
+    eyebrow: 'A sacred beginning',
+    weds: 'weds',
+    tapCue: 'Tap once — the temple doors open',
+    scrollCue: 'or scroll to enter',
+    familyEyebrow: 'A complete family invitation',
+    familyBlessing:
+      'With the blessings of the Almighty and our beloved elders, our families joyfully invite you and your family to the wedding of',
+    familyClosing: 'Your presence and blessings will make our celebration complete.',
+    eventsEyebrow: 'Every event',
+    eventsTitle: 'Date, time & location',
+    when: 'When',
+    where: 'Where',
+    location: 'Location',
+    calendar: 'Add to calendar',
+    muhurthamEyebrow: 'Your muhurtham',
+    muhurthamTitle: 'The auspicious moment',
+    mapEyebrow: 'Find your way',
+    mapTitle: 'The venue',
+    galleryEyebrow: 'Little moments',
+    galleryTitle: 'Our memories',
+  },
 
   // Full-bleed passage over the wide ceremony photograph.
   blessings: {
@@ -344,7 +384,7 @@ export const wedding = {
     text: 'A little collection of us, made to be treasured.',
     // Must reference keys in `images` above.
     items: [
-      { image: 'keepsakeBeginning', caption: 'The beginning' },
+      { image: 'seated', caption: 'The beginning' },
       { image: 'keepsakeJoy', caption: 'Little joys' },
       { image: 'keepsakeTogether', caption: 'Together' },
       { image: 'keepsakeForever', caption: 'Our forever' },
