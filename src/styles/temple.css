@@ -352,6 +352,17 @@ body::before {
   opacity: 0;
 }
 
+/* The couple standing in the mandap, revealed as the doors open. */
+.temple-gate__couple {
+  position: absolute;
+  inset-inline: 10%;
+  inset-block-end: 3%;
+  inline-size: 80%;
+  block-size: auto;
+  max-block-size: 62%;
+  opacity: 0;
+}
+
 /* Two teak doors inside a stone-and-brass arch. */
 .temple-gate__doors {
   position: absolute;
@@ -763,6 +774,7 @@ body::before {
 }
 
 .muhurtham__photo {
+  overflow: hidden;
   aspect-ratio: 4 / 3 !important;
   border-radius: 0;
 }

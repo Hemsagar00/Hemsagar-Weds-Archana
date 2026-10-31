@@ -8,6 +8,7 @@
 
 import { ArrowDown, HandTap } from '@phosphor-icons/react';
 import { Icon } from './primitives';
+import { CoupleFigures } from './Characters';
 import { images, wedding } from '../config';
 import { useScene, reducedMotion } from '../lib/gsap';
 import { longDate } from '../lib/time';
@@ -66,6 +67,11 @@ export default function TempleOpening() {
       .to(q('.temple-door--right'), { rotateY: -108, duration: 0.3, ease: 'power2.inOut' }, 0.66)
       .fromTo(q('.temple-gate__light'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.18 }, 0.66)
       .fromTo(q('.temple-gate__mandap'), { scale: 1.18 }, { scale: 1, duration: 0.34 }, 0.66)
+      // Behind the doors the couple are waiting: they rise into the light and step
+      // towards each other as the doors finish opening.
+      .fromTo(q('.temple-gate__couple'), { autoAlpha: 0, yPercent: 30, scale: 0.85 }, { autoAlpha: 1, yPercent: 0, scale: 1, duration: 0.24, ease: 'power2.out' }, 0.72)
+      .fromTo(q('.temple-gate__couple .couple__groom'), { x: -40 }, { x: 0, duration: 0.2, ease: 'power1.out' }, 0.78)
+      .fromTo(q('.temple-gate__couple .couple__bride'), { x: 40 }, { x: 0, duration: 0.2, ease: 'power1.out' }, 0.78)
       .to(q('.temple-gate__light'), { autoAlpha: 0, duration: 0.1 }, 0.9);
   });
 
@@ -111,6 +117,7 @@ export default function TempleOpening() {
         <div className="temple-gate" aria-hidden="true">
           <img className="temple-gate__mandap" src={images.mandap.src} srcSet={srcSet(images.mandap)} sizes="30rem" alt="" />
           <span className="temple-gate__light" />
+          <CoupleFigures className="temple-gate__couple" />
           <div className="temple-gate__doors">
             <Door side="left" />
             <Door side="right" />

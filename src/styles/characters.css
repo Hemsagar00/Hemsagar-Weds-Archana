@@ -1,0 +1,279 @@
+/* ── Animated bride and groom ──────────────────────────────────────────────────
+   Motion for components/Characters.jsx. Every moving part is a group inside the SVG,
+   so transform-box: fill-box lets each one pivot on its own shape. Nothing here is
+   needed to read the invitation, and all of it stops under reduced motion. */
+
+.char svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.char__body,
+.char__head,
+.char__eyes,
+.char__hands,
+.char__garland,
+.char__jhumka,
+.char__jewel,
+.char__bangles,
+.char__halo,
+.char__spark,
+.char__kalgi,
+.char__veil,
+.char__dupatta,
+.char__bouquet {
+  transform-box: fill-box;
+}
+
+/* They settle in and breathe. */
+.char__figure {
+  animation: char-rise 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.char__body {
+  transform-origin: 50% 100%;
+  animation: char-breathe 4.8s ease-in-out infinite;
+}
+
+.char__head {
+  transform-origin: 50% 100%;
+  animation: char-nod 7s ease-in-out infinite;
+}
+
+.char__eyes {
+  transform-origin: 50% 50%;
+  animation: char-blink 5.2s infinite;
+}
+
+.char__hands,
+.char__bouquet {
+  transform-origin: 50% 0;
+  animation: char-namaste 4.8s ease-in-out infinite;
+}
+
+/* The kalgi fans out from its base; the veil and dupatta catch a breeze. */
+.char__kalgi {
+  transform-origin: 0 100%;
+  animation: char-swing 3.4s ease-in-out infinite;
+}
+
+.char__veil {
+  transform-origin: 50% 0;
+  animation: char-flutter 5.6s ease-in-out infinite;
+}
+
+.char__dupatta {
+  transform-origin: 30% 0;
+  animation: char-sway 4.2s ease-in-out infinite;
+}
+
+.char__garland {
+  transform-origin: 50% 0;
+  animation: char-sway 5.5s ease-in-out infinite;
+}
+
+.char__jhumka {
+  transform-origin: 50% 0;
+  animation: char-swing 3.6s ease-in-out infinite;
+}
+
+.char__jhumka--late {
+  animation-delay: -1.8s;
+}
+
+.char__jewel,
+.char__bangles {
+  animation: char-shimmer 3.2s ease-in-out infinite;
+}
+
+.char__halo {
+  transform-origin: 50% 50%;
+  animation: char-glow 6s ease-in-out infinite;
+}
+
+.char__spark {
+  transform-origin: 50% 50%;
+  opacity: 0;
+  animation: char-twinkle 4s ease-in-out var(--delay, 0s) infinite;
+}
+
+.char__petal {
+  opacity: 0;
+  animation: char-fall var(--dur, 10s) linear var(--delay, 0s) infinite;
+}
+
+@keyframes char-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes char-breathe {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-2px) scale(1.012);
+  }
+}
+
+@keyframes char-nod {
+  0%,
+  100% {
+    transform: rotate(-1.8deg);
+  }
+
+  50% {
+    transform: rotate(1.8deg);
+  }
+}
+
+@keyframes char-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  95% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes char-namaste {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-1.5px) scale(1.035);
+  }
+}
+
+@keyframes char-sway {
+  0%,
+  100% {
+    transform: rotate(-1.4deg);
+  }
+
+  50% {
+    transform: rotate(1.4deg);
+  }
+}
+
+@keyframes char-swing {
+  0%,
+  100% {
+    transform: rotate(9deg);
+  }
+
+  50% {
+    transform: rotate(-9deg);
+  }
+}
+
+@keyframes char-flutter {
+  0%,
+  100% {
+    transform: skewX(0deg) scaleX(1);
+  }
+
+  50% {
+    transform: skewX(-2.4deg) scaleX(1.025);
+  }
+}
+
+@keyframes char-shimmer {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes char-glow {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(0.96);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes char-twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1) rotate(45deg);
+  }
+}
+
+@keyframes char-fall {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  10% {
+    opacity: 0.9;
+  }
+
+  90% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx, 10px), var(--fall, 300px)) rotate(300deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .char__figure,
+  .char__body,
+  .char__head,
+  .char__eyes,
+  .char__hands,
+  .char__garland,
+  .char__jhumka,
+  .char__jewel,
+  .char__bangles,
+  .char__halo,
+  .char__kalgi,
+  .char__veil,
+  .char__dupatta,
+  .char__bouquet {
+    animation: none;
+  }
+
+  .char__petal {
+    display: none;
+  }
+
+  .char__spark {
+    animation: none;
+    opacity: 0.7;
+  }
+}

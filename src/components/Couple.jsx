@@ -2,7 +2,12 @@
 // each, from `wedding.profiles`.
 
 import { Photo } from './primitives';
+import { BridePortrait, GroomPortrait } from './Characters';
 import { wedding } from '../config';
+
+// Illustrated characters stand in for photographs; a profile whose `image` has no
+// character still falls back to its photograph.
+const CHARACTERS = { groom: GroomPortrait, bride: BridePortrait };
 
 function Profile({ profile }) {
   const facts = [
@@ -11,10 +16,16 @@ function Profile({ profile }) {
     ['Profession', profile.profession],
   ].filter(([, value]) => value);
 
+  const Character = CHARACTERS[profile.image];
+
   return (
     <article className="couple-card" data-anim>
       <div className="couple-card__arch">
-        <Photo name={profile.image} className="couple-card__photo" sizes="(min-width: 32rem) 14rem, 46vw" />
+        {Character ? (
+          <Character className="couple-card__photo" />
+        ) : (
+          <Photo name={profile.image} className="couple-card__photo" sizes="(min-width: 32rem) 14rem, 46vw" />
+        )}
       </div>
       <p className="couple-card__role">{profile.role}</p>
       <h3 className="couple-card__name">{profile.name}</h3>
